@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import logoHColor from './assets/logos/logo-h-color.svg'
 import logoVBlanco from './assets/logos/logo-v-blanco.svg'
 import logoHNegro from './assets/logos/logo-h-negro.svg'
+import logoHBlanco from './assets/logos/logo-h-blanco.svg'
 
 /* ─── Scroll reveal hook ─── */
 function useReveal() {
@@ -684,7 +685,7 @@ function Footer() {
   return (
     <footer className="bg-[#0D0D14] py-8 px-6">
       <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-        <img src={logoHNegro} alt="SURI" className="h-6 w-auto" />
+        <img src={logoHBlanco} alt="SURI" className="h-6 w-auto" />
         <p className="text-gray-400 text-xs">© {new Date().getFullYear()} SURI. Todos los derechos reservados.</p>
         <p className="text-gray-400 text-xs">Hecho con intención, no solo con IA.</p>
       </div>
