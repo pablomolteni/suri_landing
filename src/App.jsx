@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import logoHColor from './assets/logos/logo-h-color.svg'
 import logoVBlanco from './assets/logos/logo-v-blanco.svg'
+import logoHNegro from './assets/logos/logo-h-negro.svg'
 
 /* ─── Scroll reveal hook ─── */
 function useReveal() {
@@ -64,12 +65,12 @@ function Navbar() {
 
         {/* Mobile hamburger */}
         <button
-          className={`md:hidden p-2 ${scrolled ? 'text-gray-800' : 'text-white'}`}
+          className="md:hidden p-2 text-gray-800"
           onClick={() => setOpen(!open)}
         >
-          <div className={`w-5 h-0.5 mb-1.5 transition-all ${scrolled ? 'bg-gray-800' : 'bg-white'}`} />
-          <div className={`w-5 h-0.5 mb-1.5 transition-all ${scrolled ? 'bg-gray-800' : 'bg-white'}`} />
-          <div className={`w-5 h-0.5 transition-all ${scrolled ? 'bg-gray-800' : 'bg-white'}`} />
+          <div className="w-5 h-0.5 mb-1.5 bg-gray-800" />
+          <div className="w-5 h-0.5 mb-1.5 bg-gray-800" />
+          <div className="w-5 h-0.5 bg-gray-800" />
         </button>
       </div>
 
@@ -683,7 +684,7 @@ function Footer() {
   return (
     <footer className="bg-[#0D0D14] py-8 px-6">
       <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-        <img src={logoVBlanco} alt="SURI" className="h-10 w-auto" />
+        <img src={logoHNegro} alt="SURI" className="h-6 w-auto" />
         <p className="text-gray-400 text-xs">© {new Date().getFullYear()} SURI. Todos los derechos reservados.</p>
         <p className="text-gray-400 text-xs">Hecho con intención, no solo con IA.</p>
       </div>
