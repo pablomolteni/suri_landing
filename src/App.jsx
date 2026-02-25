@@ -33,11 +33,11 @@ function Navbar() {
   ]
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-sm' : 'bg-white/80 backdrop-blur-sm border-b border-gray-100'}`}>
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-sm' : 'bg-white border-b border-gray-100'}`}>
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         <a href="#" className="flex items-center">
           <img
-            src={logoHColorBlanco}
+            src={logoHColor}
             alt="SURI"
             className="h-7 w-auto transition-all duration-300"
             style={{ mixBlendMode: 'multiply' }}
@@ -513,7 +513,7 @@ function ForWhom() {
 const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID'   // ← reemplazar
 const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID'  // ← reemplazar
 const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY'   // ← reemplazar
-const TEST_EMAIL          = 'pablomoltenitest@gmail.com' // testing — cambiar a info@suri.lat en producción
+const TEST_EMAIL          = 'pablomolteni@gmail.com' // testing — cambiar a info@suri.lat en producción
 
 // URL de la página de agendado (Google Calendar, Calendly, etc.)
 const SCHEDULING_URL = 'https://calendar.google.com/calendar/u/0/r' // ← reemplazar con tu link
