@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import logoHColorNegro from './assets/logos/SURI_Logo_hcolor.png'
+import logoHColorBlanco from './assets/logos/logo-h-color-blanco.png'
 import logoHColor from './assets/logos/logo-h-color.png'
 
 /* ─── Scroll reveal hook ─── */
@@ -37,7 +37,7 @@ function Navbar() {
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         <a href="#" className="flex items-center">
           <img
-            src={logoHColorNegro}
+            src={logoHColorBlanco}
             alt="SURI"
             className="h-7 w-auto transition-all duration-300"
             style={{ mixBlendMode: 'multiply' }}
