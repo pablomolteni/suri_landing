@@ -513,7 +513,7 @@ function ForWhom() {
 const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID'   // ← reemplazar
 const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID'  // ← reemplazar
 const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY'   // ← reemplazar
-const TEST_EMAIL          = 'pablomolteni@gmail.com' // testing — cambiar a info@suri.lat en producción
+const TEST_EMAIL          = 'pablomoltenitest@gmail.com' // testing — cambiar a info@suri.lat en producción
 
 // URL de la página de agendado (Google Calendar, Calendly, etc.)
 const SCHEDULING_URL = 'https://calendar.google.com/calendar/u/0/r' // ← reemplazar con tu link
