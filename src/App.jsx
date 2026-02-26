@@ -164,10 +164,10 @@ function Problem() {
     {
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-7 h-7 text-[#A37EF7]">
-          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
         </svg>
       ),
-      title: 'Dependencia humana', desc: 'Los procesos críticos dependen de personas específicas, generando cuellos de botella.'
+      title: 'Operación costosa', desc: 'La operación consume más tiempo y recursos del que debería invertirse.'
     },
     {
       icon: (
@@ -180,10 +180,10 @@ function Problem() {
     {
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-7 h-7 text-[#A37EF7]">
-          <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
         </svg>
       ),
-      title: 'Operación costosa', desc: 'La operación consume más tiempo y recursos del que debería invertirse.'
+      title: 'Resistencia al cambio', desc: 'Adoptar nuevas formas de trabajar genera fricción interna que frena la transformación.'
     },
   ]
 
@@ -282,7 +282,8 @@ function WhatIsSuri() {
 function Services() {
   const [open, setOpen] = useState(null)
 
-  // Implementación al centro (index 1), es el producto principal
+  // Desktop: Capacitación | Implementación (centro) | Auditoría
+  // Mobile: Implementación primero (order CSS)
   const services = [
     {
       color: '#0061FC',
@@ -296,6 +297,7 @@ function Services() {
       ],
       cta: 'Quiero capacitar a mi equipo',
       featured: false,
+      mobileOrder: 2,
     },
     {
       color: '#A37EF7',
@@ -309,6 +311,7 @@ function Services() {
       ],
       cta: 'Quiero implementar',
       featured: true,
+      mobileOrder: 1,
     },
     {
       color: '#F58CF5',
@@ -323,6 +326,7 @@ function Services() {
       ],
       cta: 'Quiero auditar mi operación',
       featured: false,
+      mobileOrder: 3,
     },
   ]
 
@@ -336,28 +340,19 @@ function Services() {
           </h2>
         </div>
 
-        {/* Grid con items-start para evitar whitespace al expandir */}
         <div className="grid lg:grid-cols-3 gap-6 items-start">
           {services.map((s, i) => {
             const isOpen = open === i
             return (
               <div
                 key={s.title}
-                className={`reveal reveal-delay-${i + 1} rounded-3xl p-7 flex flex-col transition-all duration-300
+                style={{ order: s.mobileOrder }}
+                className={`reveal lg:order-none rounded-3xl p-7 flex flex-col transition-all duration-300
                   ${s.featured
                     ? 'bg-white shadow-2xl ring-2 ring-[#A37EF7]/30 lg:-mt-4 lg:mb-4'
                     : 'bg-white shadow-sm hover:shadow-lg'
                   }`}
               >
-                {/* Badge featured */}
-                {s.featured && (
-                  <div className="mb-4">
-                    <span className="inline-block px-3 py-1 rounded-full text-xs font-bold gradient-bg text-white tracking-wide">
-                      ★ Producto principal
-                    </span>
-                  </div>
-                )}
-
                 {/* Color dot */}
                 <div className="w-3 h-3 rounded-full mb-5" style={{ background: s.color }} />
 
@@ -365,7 +360,7 @@ function Services() {
                 <p className="text-sm font-medium mb-3" style={{ color: s.color }}>{s.tagline}</p>
                 <p className="text-gray-500 text-sm leading-relaxed mb-5">{s.summary}</p>
 
-                {/* Expandable detail - always rendered, animated via max-height */}
+                {/* Expandable detail */}
                 <div
                   className="overflow-hidden transition-all duration-500 ease-in-out"
                   style={{ maxHeight: isOpen ? '600px' : '0px', opacity: isOpen ? 1 : 0 }}
@@ -457,11 +452,11 @@ function HowWeWork() {
 /* ─── For whom ─── */
 function ForWhom() {
   const traits = [
-    { title: 'Quieren modernizar su operación', desc: 'Buscan actualizar procesos sin generar disrupción en el día a día.' },
-    { title: 'Buscan optimizar presupuestos', desc: 'Necesitan hacer más con los recursos existentes.' },
-    { title: 'Necesitan escalar sin sumar equipo', desc: 'Quieren crecer sin incrementar costos fijos significativamente.' },
     { title: 'Valoran el enfoque consultivo', desc: 'Prefieren un socio estratégico antes que un proveedor de tecnología.' },
     { title: 'Entienden que la eficiencia es estratégica', desc: 'Reconocen que optimizar la operación es clave para competir.' },
+    { title: 'Quieren modernizar su operación', desc: 'Buscan actualizar procesos sin generar disrupción en el día a día.' },
+    { title: 'Buscan optimizar presupuestos', desc: 'Necesitan hacer más con los recursos existentes.' },
+    { title: 'Necesitan escalar su operación', desc: 'Quieren crecer sin incrementar costos fijos significativamente.' },
   ]
 
   return (
@@ -476,7 +471,7 @@ function ForWhom() {
               <span className="gradient-text">es SURI?</span>
             </h2>
             <p className="reveal text-gray-500 text-lg leading-relaxed">
-              Trabajamos con empresas medianas y grandes que buscan modernizar su operación sin perder el foco en el negocio.
+              Trabajamos con empresas que buscan modernizar su operación sin perder el foco en el negocio.
             </p>
           </div>
 
@@ -577,23 +572,36 @@ function Contact() {
         <div className="grid md:grid-cols-2 gap-6 items-start">
 
           {/* Opción 1 — Agendar reunión */}
-          <div className="reveal bg-white/15 backdrop-blur-sm border border-white/20 rounded-3xl p-8 text-white flex flex-col h-full">
-            <div className="mb-6">
-              <div className="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center mb-4">
+          <div className="reveal bg-white/15 backdrop-blur-sm border border-white/20 rounded-3xl p-8 text-white flex flex-col justify-between gap-8">
+            <div>
+              <div className="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center mb-6">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-6 h-6 text-white">
                   <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
                 </svg>
               </div>
-              <h3 className="text-xl font-bold mb-2">Agendá una reunión</h3>
-              <p className="text-white/70 text-sm leading-relaxed">
+              <h3 className="text-2xl font-bold mb-3">Agendá una reunión</h3>
+              <p className="text-white/70 text-sm leading-relaxed mb-6">
                 Reservá un espacio en nuestra agenda para una llamada de 30 minutos. Sin compromiso, sin formularios.
               </p>
+              {/* Feature list */}
+              <ul className="flex flex-col gap-3">
+                {['30 minutos, sin compromiso', 'Te contamos cómo podemos ayudarte', 'Respondemos todas tus preguntas'].map(item => (
+                  <li key={item} className="flex items-center gap-3 text-sm text-white/80">
+                    <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-3 h-3">
+                        <polyline points="20 6 9 17 4 12"/>
+                      </svg>
+                    </div>
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </div>
             <a
               href={SCHEDULING_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-auto w-full text-center py-4 rounded-xl bg-white text-[#0061FC] font-bold text-sm hover:scale-[1.02] transition-transform duration-200 shadow-lg"
+              className="w-full text-center py-4 rounded-xl bg-white text-[#0061FC] font-bold text-sm hover:scale-[1.02] transition-transform duration-200 shadow-lg"
             >
               Hablemos →
             </a>
@@ -673,7 +681,7 @@ function Contact() {
           <span className="text-white/30">·</span>
           <a href="mailto:info@suri.lat" className="hover:text-white transition-colors">info@suri.lat</a>
           <span className="text-white/30">·</span>
-          <a href="https://linkedin.com/company/suri_automo" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">LinkedIn</a>
+          <a href="https://www.linkedin.com/company/suri-ia/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">LinkedIn</a>
         </div>
       </div>
     </section>
