@@ -497,21 +497,6 @@ function ForWhom() {
 }
 
 /* ─── CTA / Contact ─── */
-// ─────────────────────────────────────────────────────────────────
-// EMAILJS CONFIG — completar antes de ir a producción:
-//   1. Crear cuenta en https://www.emailjs.com
-//   2. Agregar un servicio de Gmail (obtener EMAILJS_SERVICE_ID)
-//   3. Crear un Email Template con variables: {{from_name}}, {{from_email}}, {{message}}
-//      y configurar "To Email" como info@suri.lat (EMAILJS_TEMPLATE_ID)
-//   4. Copiar el Public Key desde Account > API Keys (EMAILJS_PUBLIC_KEY)
-//   5. Reemplazar los tres valores de abajo y sacar el flag TEST_MODE
-// ─────────────────────────────────────────────────────────────────
-const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID'   // ← reemplazar
-const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID'  // ← reemplazar
-const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY'   // ← reemplazar
-const TEST_EMAIL = 'pablomolteni+suri@gmail.com'
-
-// URL de la página de agendado (Google Calendar, Calendly, etc.)
 const SCHEDULING_URL = 'https://calendar.app.google/wd3pFyhNQ5cvne6e9'
 
 function Contact() {
@@ -524,21 +509,10 @@ function Contact() {
     e.preventDefault()
     setStatus('sending')
     try {
-      // EmailJS vía fetch REST (no requiere SDK, solo el CDN no es necesario)
-      const res = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+      const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          service_id:  EMAILJS_SERVICE_ID,
-          template_id: EMAILJS_TEMPLATE_ID,
-          user_id:     EMAILJS_PUBLIC_KEY,
-          template_params: {
-            from_name:  form.name,
-            from_email: form.email,
-            message:    form.message,
-            to_email:   TEST_EMAIL,
-          },
-        }),
+        body: JSON.stringify({ name: form.name, email: form.email, message: form.message }),
       })
       if (res.ok) {
         setStatus('ok')
