@@ -128,7 +128,7 @@ function Hero() {
               href="#contacto"
               className="px-8 py-4 rounded-full bg-white text-[#0061FC] font-bold text-base hover:scale-105 transition-transform duration-200 shadow-lg"
             >
-              Hablemos de tu operación
+              Hablemos
             </a>
             <a
               href="#servicios"
@@ -509,10 +509,10 @@ function ForWhom() {
 const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID'   // ← reemplazar
 const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID'  // ← reemplazar
 const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY'   // ← reemplazar
-const TEST_EMAIL          = 'pablomolteni@gmail.com' // testing — cambiar a info@suri.lat en producción
+const TEST_EMAIL = 'pablomolteni+suri@gmail.com'
 
 // URL de la página de agendado (Google Calendar, Calendly, etc.)
-const SCHEDULING_URL = 'https://calendar.google.com/calendar/u/0/r' // ← reemplazar con tu link
+const SCHEDULING_URL = 'https://calendar.app.google/wd3pFyhNQ5cvne6e9'
 
 function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' })
