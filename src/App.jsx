@@ -101,9 +101,6 @@ function Hero() {
       <div className="absolute top-1/4 right-0 w-96 h-96 rounded-full bg-white/10 blur-3xl animate-float" />
       <div className="absolute bottom-1/4 left-0 w-80 h-80 rounded-full bg-white/10 blur-3xl" style={{ animationDelay: '2s' }} />
 
-      {/* Big S watermark */}
-      <div className="absolute right-8 top-1/2 -translate-y-1/2 text-white/10 font-bold select-none pointer-events-none hidden lg:block" style={{ fontSize: '40vw', lineHeight: 1 }}>S</div>
-
       <div className="relative max-w-6xl mx-auto px-6 py-32 text-white">
         <div className="max-w-3xl">
           {/* Badges */}
@@ -138,13 +135,6 @@ function Hero() {
             </a>
           </div>
         </div>
-      </div>
-
-      {/* Wave divider */}
-      <div className="absolute bottom-0 left-0 right-0">
-        <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
-          <path d="M0 80L1440 80L1440 20C1200 80 960 0 720 40C480 80 240 0 0 40L0 80Z" fill="white" />
-        </svg>
       </div>
     </section>
   )
@@ -188,7 +178,7 @@ function Problem() {
   ]
 
   return (
-    <section className="bg-[#0D0D14] py-24 relative overflow-hidden">
+    <section className="bg-[#0D0D14] pt-24 pb-24 relative overflow-hidden">
       {/* Subtle gradient glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-[#A37EF7]/40 to-transparent" />
 
@@ -218,13 +208,6 @@ function Problem() {
         </div>
 
       </div>
-
-      {/* Wave bottom */}
-      <div className="absolute bottom-0 left-0 right-0">
-        <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
-          <path d="M0 60L1440 60L1440 20C1200 0 960 60 720 30C480 0 240 60 0 20L0 60Z" fill="white" />
-        </svg>
-      </div>
     </section>
   )
 }
@@ -251,7 +234,7 @@ function WhatIsSuri() {
               SURI ayuda a empresas a automatizar tareas repetitivas mediante flujos inteligentes e inteligencia artificial aplicada. La IA es un medio — poderoso cuando se aplica con criterio estratégico.
             </p>
             <div className="reveal inline-block px-5 py-3 rounded-xl bg-[#F8F9FF] border border-[#0061FC]/10 text-[#0061FC] font-medium text-sm">
-              El proceso es el corazón. La eficiencia es el resultado.
+              Procesos escalables
             </div>
           </div>
 
