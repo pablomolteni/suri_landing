@@ -298,7 +298,7 @@ function Services() {
     },
     {
       color: '#F58CF5',
-      title: 'Evaluación y Auditoría',
+      title: 'Diagnóstico y Evaluación',
       tagline: 'Entendemos tu operación antes de proponer cualquier cambio.',
       summary: 'Entrevistamos a tu equipo, medimos la penetración real de IA y automatización, e identificamos oportunidades con ROI concreto.',
       details: [
@@ -307,7 +307,7 @@ function Services() {
         { label: 'Plan de implementación', desc: 'Hoja de ruta priorizada: nombre, descripción, ROI, tiempo y fecha sugerida de inicio.' },
         { label: 'Informe ejecutivo', desc: 'Documento con abstract, background, fortalezas, debilidades y recomendaciones accionables.' },
       ],
-      cta: 'Quiero auditar mi operación',
+      cta: 'Quiero evaluar mi operación',
       featured: false,
       mobileOrder: 3,
     },
