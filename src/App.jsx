@@ -311,7 +311,8 @@ function Services() {
         { label: 'Plan de implementación', desc: 'Hoja de ruta priorizada: nombre, descripción, ROI, tiempo y fecha sugerida de inicio.' },
         { label: 'Informe ejecutivo', desc: 'Documento con abstract, background, fortalezas, debilidades y recomendaciones accionables.' },
       ],
-      cta: 'Quiero evaluar mi operación',
+      cta: 'Quiero diagnosticar mi operación',
+      ctaHref: '/diagnostico',
       featured: false,
       mobileOrder: 3,
     },
@@ -368,7 +369,7 @@ function Services() {
                     <span>{isOpen ? '↑ Menos detalle' : '↓ Ver más detalle'}</span>
                   </button>
                   <a
-                    href="#contacto"
+                    href={s.ctaHref || '#contacto'}
                     className="w-full text-center py-3 rounded-xl text-sm font-bold text-white transition-all duration-200 hover:opacity-90 hover:scale-[1.02]"
                     style={{ background: s.featured ? `linear-gradient(135deg, #0061FC, #A37EF7)` : s.color }}
                   >
