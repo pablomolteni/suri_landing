@@ -613,113 +613,57 @@ function DiagHero() {
       <div className="absolute top-1/4 right-0 w-96 h-96 rounded-full bg-white/10 blur-3xl animate-float" />
       <div className="absolute bottom-1/4 left-0 w-80 h-80 rounded-full bg-white/10 blur-3xl" style={{ animationDelay: '2s' }} />
 
-      <div className="relative max-w-6xl mx-auto px-6 py-32 text-white">
-        <div className="max-w-3xl">
-          <div className="animate-fade-up flex flex-wrap gap-3 mb-8">
-            {['DIAGNÓSTICO', 'MADUREZ DIGITAL', 'PYMES'].map(tag => (
-              <span key={tag} className="px-4 py-1.5 rounded-full border border-white/30 text-sm font-semibold tracking-widest">
-                {tag}
-              </span>
-            ))}
-          </div>
+      <div className="relative max-w-6xl mx-auto px-6 py-32 w-full">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
 
-          <h1 className="animate-fade-up-delay-1 text-4xl md:text-6xl font-extrabold leading-[1.05] mb-6">
-            ¿Qué tan preparada está tu empresa para el mundo digital?
-          </h1>
-
-          <p className="animate-fade-up-delay-2 text-xl md:text-2xl font-medium text-white/80 mb-10 max-w-2xl">
-            Nuestro diagnóstico de madurez digital evalúa 8 dimensiones clave de tu organización y te entrega un plan de acción concreto para mejorar.
-          </p>
-
-          <div className="animate-fade-up-delay-3 flex flex-wrap gap-4">
-            <a
-              href="#contacto-diagnostico"
-              className="px-8 py-4 rounded-full bg-white text-[#0061FC] font-bold text-base hover:scale-105 transition-transform duration-200 shadow-lg"
-            >
-              Solicitar diagnóstico
-            </a>
-            <a
-              href="#como-funciona"
-              className="px-8 py-4 rounded-full border border-white/40 text-white font-semibold text-base hover:bg-white/10 transition-all duration-200"
-            >
-              Ver cómo funciona
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-/* ─── Diag Problem ─── */
-function DiagProblem() {
-  const pains = [
-    {
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-7 h-7 text-[#A37EF7]">
-          <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
-        </svg>
-      ),
-      title: 'Tiempo perdido en lo operativo',
-      desc: 'Procesos manuales que consumen horas del equipo sin agregar valor estratégico.',
-    },
-    {
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-7 h-7 text-[#A37EF7]">
-          <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
-        </svg>
-      ),
-      title: 'Herramientas que no se usan bien',
-      desc: 'Herramientas digitales que se adoptaron sin criterio y no generan el valor esperado.',
-    },
-    {
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-7 h-7 text-[#A37EF7]">
-          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-        </svg>
-      ),
-      title: 'Brecha entre dirección y operación',
-      desc: 'La dirección tiene una percepción del estado tecnológico que no coincide con la realidad operativa.',
-    },
-    {
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-7 h-7 text-[#A37EF7]">
-          <line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/>
-        </svg>
-      ),
-      title: 'Sin hoja de ruta tecnológica',
-      desc: 'No hay un plan claro de hacia dónde ir con la tecnología ni cómo priorizar las inversiones.',
-    },
-  ]
-
-  return (
-    <section className="bg-[#0D0D14] py-24 relative overflow-hidden">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-[#A37EF7]/40 to-transparent" />
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="text-center mb-16">
-          <p className="reveal text-[#A37EF7] font-semibold tracking-widest text-sm uppercase mb-4">El problema</p>
-          <h2 className="reveal text-4xl md:text-5xl font-extrabold text-white leading-tight">
-            La tecnología avanza.<br />
-            <span className="gradient-text">¿Tu empresa avanza con ella?</span>
-          </h2>
-          <p className="reveal text-gray-400 mt-4 max-w-xl mx-auto text-lg">
-            Muchas empresas invierten en tecnología sin un diagnóstico previo. El resultado: herramientas subutilizadas, procesos sin mejorar y equipos frustrados.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {pains.map((p, i) => (
-            <div key={p.title} className={`reveal reveal-delay-${i + 1} bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-[#A37EF7]/30 transition-all duration-300`}>
-              <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center mb-4">{p.icon}</div>
-              <h3 className="text-white font-bold text-lg mb-2">{p.title}</h3>
-              <p className="text-gray-400 text-sm leading-relaxed">{p.desc}</p>
+          {/* Left — copy */}
+          <div className="text-white">
+            <div className="animate-fade-up flex flex-wrap gap-3 mb-8">
+              {['DIAGNÓSTICO', 'MADUREZ DIGITAL', 'PYMES'].map(tag => (
+                <span key={tag} className="px-4 py-1.5 rounded-full border border-white/30 text-sm font-semibold tracking-widest">
+                  {tag}
+                </span>
+              ))}
             </div>
-          ))}
-        </div>
 
-        <p className="reveal mt-12 text-center text-[#A37EF7] font-semibold text-base">
-          El primer paso para mejorar es medir. Y eso es exactamente lo que hacemos.
-        </p>
+            <h1 className="animate-fade-up-delay-1 text-4xl md:text-5xl font-extrabold leading-[1.05] mb-6">
+              ¿Qué tan preparada está tu empresa para el mundo digital?
+            </h1>
+
+            <p className="animate-fade-up-delay-2 text-lg md:text-xl font-medium text-white/80 mb-10">
+              Nuestro diagnóstico evalúa 8 dimensiones clave de tu organización y te entrega un plan de acción concreto para mejorar.
+            </p>
+
+            <div className="animate-fade-up-delay-3 flex flex-wrap gap-4">
+              <a
+                href="#contacto-diagnostico"
+                className="px-8 py-4 rounded-full bg-white text-[#0061FC] font-bold text-base hover:scale-105 transition-transform duration-200 shadow-lg"
+              >
+                Solicitar diagnóstico
+              </a>
+              <a
+                href="#como-funciona"
+                className="px-8 py-4 rounded-full border border-white/40 text-white font-semibold text-base hover:bg-white/10 transition-all duration-200"
+              >
+                Ver cómo funciona
+              </a>
+            </div>
+          </div>
+
+          {/* Right — product screenshot */}
+          <div className="animate-fade-up-delay-2 hidden lg:flex justify-end items-center">
+            <div className="relative w-full max-w-lg">
+              {/* Glow behind image */}
+              <div className="absolute inset-0 bg-white/10 blur-2xl rounded-3xl scale-95" />
+              <img
+                src="/scoring_1.png"
+                alt="Gráfico de araña por dimensión"
+                className="relative rounded-2xl shadow-2xl w-full border border-white/20"
+              />
+            </div>
+          </div>
+
+        </div>
       </div>
     </section>
   )
@@ -834,36 +778,34 @@ function DiagComoFunciona() {
 /* ─── Diag Entregables ─── */
 function DiagEntregables() {
   const items = [
-    { title: 'Puntaje global de madurez digital', desc: 'Nivel 1 a 4, con descripción de lo que significa cada nivel para tu organización.' },
+    { title: 'Puntaje global de madurez digital', desc: 'Nivel 1 a 4, con descripción de lo que significa para tu organización.' },
     { title: 'Gráfico de araña por dimensión', desc: 'Visualización de scores en las 8 dimensiones evaluadas.' },
-    { title: 'Análisis de brecha dirección-operativos', desc: 'Identificación de diferencias de percepción entre niveles jerárquicos.' },
-    { title: 'Hallazgos cualitativos', desc: 'Voces anonimizadas de la organización que enriquecen el análisis cuantitativo.' },
-    { title: 'Roadmap de mejora en 3 horizontes', desc: 'Iniciativas priorizadas para 0-3, 3-9 y 9-18 meses.' },
-    { title: 'Plan de capacitaciones personalizado', desc: 'Recomendaciones de formación ajustadas al perfil y brechas detectadas.' },
+    { title: 'Análisis de brecha dirección-operativos', desc: 'Diferencias de percepción entre niveles jerárquicos.' },
+    { title: 'Hallazgos cualitativos', desc: 'Voces anonimizadas de la organización que enriquecen el análisis.' },
+    { title: 'Roadmap en 3 horizontes', desc: 'Iniciativas priorizadas para 0-3, 3-9 y 9-18 meses.' },
+    { title: 'Plan de capacitaciones personalizado', desc: 'Recomendaciones ajustadas al perfil y brechas detectadas.' },
   ]
 
   return (
     <section className="py-24 bg-white">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
-          <div>
-            <p className="reveal text-[#0061FC] font-semibold tracking-widest text-sm uppercase mb-4">El entregable</p>
-            <h2 className="reveal text-4xl md:text-5xl font-extrabold text-[#0D0D0D] leading-tight mb-6">
-              Qué vas a<br />
-              <span className="gradient-text">recibir</span>
-            </h2>
-            <p className="reveal text-gray-500 text-lg leading-relaxed mb-8">
-              Cada hallazgo viene con una recomendación concreta. No cerramos en diagnóstico negativo: siempre hay un camino claro para mejorar.
-            </p>
-            <a
-              href="#contacto-diagnostico"
-              className="reveal inline-block px-8 py-4 rounded-full gradient-bg text-white font-bold text-base hover:opacity-90 transition-all duration-200"
-            >
-              Solicitar diagnóstico
-            </a>
-          </div>
 
-          <div className="flex flex-col gap-4">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <p className="reveal text-[#0061FC] font-semibold tracking-widest text-sm uppercase mb-4">El entregable</p>
+          <h2 className="reveal text-4xl md:text-5xl font-extrabold text-[#0D0D0D] leading-tight">
+            Qué vas a <span className="gradient-text">recibir</span>
+          </h2>
+          <p className="reveal text-gray-500 mt-4 max-w-xl mx-auto text-lg">
+            Cada hallazgo viene con una recomendación concreta. No cerramos en diagnóstico negativo.
+          </p>
+        </div>
+
+        {/* Two columns: bullets + screenshots */}
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
+
+          {/* Left — deliverable list */}
+          <div className="flex flex-col gap-3">
             {items.map((item, i) => (
               <div key={item.title} className={`reveal reveal-delay-${Math.min(i + 1, 6)} flex items-start gap-4 bg-[#F8F9FF] rounded-2xl px-5 py-4 hover:shadow-md transition-shadow duration-300`}>
                 <div className="mt-1 flex-shrink-0 w-5 h-5 rounded-full gradient-bg" />
@@ -873,100 +815,21 @@ function DiagEntregables() {
                 </div>
               </div>
             ))}
+            <a
+              href="#contacto-diagnostico"
+              className="reveal mt-2 inline-block px-8 py-4 rounded-full gradient-bg text-white font-bold text-base hover:opacity-90 transition-all duration-200 text-center"
+            >
+              Solicitar diagnóstico
+            </a>
           </div>
-        </div>
-      </div>
-    </section>
-  )
-}
 
-/* ─── Diag Para quién ─── */
-function DiagParaQuien() {
-  const traits = [
-    { title: 'Empresas de 10 a 500 empleados', desc: 'Industriales, de servicios o familiares con masa crítica para medir y mejorar.' },
-    { title: 'Empresas donde la tecnología es un medio', desc: 'No empresas de tecnología. Empresas que usan tecnología para operar mejor.' },
-    { title: 'Dirección que quiere evidencia objetiva', desc: 'Antes de invertir en tecnología, primero entender qué está fallando y dónde.' },
-    { title: 'Equipos que sienten que algo no funciona', desc: 'Pero no saben por dónde empezar ni cómo priorizar las mejoras.' },
-  ]
-
-  return (
-    <section id="para-quien" className="py-24 bg-[#F8F9FF]">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          <div>
-            <p className="reveal text-[#0061FC] font-semibold tracking-widest text-sm uppercase mb-4">Perfil del cliente</p>
-            <h2 className="reveal text-4xl md:text-5xl font-extrabold text-[#0D0D0D] leading-tight mb-6">
-              ¿Es para<br />
-              <span className="gradient-text">tu empresa?</span>
-            </h2>
-            <p className="reveal text-gray-500 text-lg leading-relaxed">
-              El diagnóstico está diseñado para organizaciones que quieren tomar decisiones tecnológicas con base en datos reales, no en percepciones.
-            </p>
-            <div className="reveal mt-8 inline-block px-5 py-3 rounded-xl bg-white border border-[#0061FC]/10 text-[#0061FC] font-medium text-sm shadow-sm">
-              No es para empresas de tecnología. Es para empresas que usan tecnología.
+          {/* Right — screenshot */}
+          <div className="reveal">
+            <div className="rounded-2xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+              <img src="/scoring_2.png" alt="Detalle por dimensión" className="w-full" />
             </div>
           </div>
 
-          <div className="flex flex-col gap-4">
-            {traits.map((t, i) => (
-              <div key={t.title} className={`reveal reveal-delay-${i + 1} flex items-start gap-4 bg-white rounded-2xl px-5 py-4 shadow-sm hover:shadow-md transition-shadow duration-300`}>
-                <div className="mt-1 flex-shrink-0 w-5 h-5 rounded-full gradient-bg" />
-                <div>
-                  <p className="font-bold text-[#0D0D0D] text-sm">{t.title}</p>
-                  <p className="text-gray-500 text-xs mt-0.5">{t.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-/* ─── Diag Por qué SURI ─── */
-function DiagPorQueSuri() {
-  const reasons = [
-    {
-      color: '#0061FC',
-      title: 'Hablamos el idioma del negocio',
-      desc: 'No de la tecnología. Nuestro foco es tu operación, tus procesos y tus resultados.',
-    },
-    {
-      color: '#A37EF7',
-      title: 'Evaluamos 3 niveles organizacionales',
-      desc: 'Dirección, mandos medios y operativos. Las brechas de percepción revelan los problemas reales.',
-    },
-    {
-      color: '#F58CF5',
-      title: 'Cada recomendación tiene ROI estimado',
-      desc: 'Y un horizonte de implementación concreto. Priorizamos lo que más impacto tiene, primero.',
-    },
-    {
-      color: '#0061FC',
-      title: 'Es el primer paso de una relación',
-      desc: 'El diagnóstico no es un producto aislado. Es el punto de partida para mejorar tu operación con nosotros.',
-    },
-  ]
-
-  return (
-    <section className="py-24 bg-white">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="text-center mb-16">
-          <p className="reveal text-[#0061FC] font-semibold tracking-widest text-sm uppercase mb-4">Por qué elegirnos</p>
-          <h2 className="reveal text-4xl md:text-5xl font-extrabold text-[#0D0D0D]">
-            Por qué <span className="gradient-text">SURI</span>
-          </h2>
-        </div>
-
-        <div className="grid sm:grid-cols-2 gap-6">
-          {reasons.map((r, i) => (
-            <div key={r.title} className={`reveal reveal-delay-${i + 1} bg-[#F8F9FF] rounded-2xl p-7 hover:shadow-md transition-shadow duration-300`}>
-              <div className="w-3 h-3 rounded-full mb-5" style={{ background: r.color }} />
-              <h3 className="font-bold text-[#0D0D0D] text-lg mb-3">{r.title}</h3>
-              <p className="text-gray-500 text-sm leading-relaxed">{r.desc}</p>
-            </div>
-          ))}
         </div>
       </div>
     </section>
@@ -1125,12 +988,9 @@ function DiagnosticoPage() {
   return (
     <>
       <DiagHero />
-      <DiagProblem />
-      <DiagQueEs />
-      <DiagComoFunciona />
       <DiagEntregables />
-      <DiagParaQuien />
-      <DiagPorQueSuri />
+      <DiagComoFunciona />
+      <DiagQueEs />
       <DiagContact />
     </>
   )
