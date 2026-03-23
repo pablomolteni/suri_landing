@@ -913,7 +913,7 @@ function DiagContact() {
             </a>
           </div>
 
-          <div className="reveal reveal-delay-1 bg-white rounded-3xl p-8 flex flex-col">
+          <div id="escribinos" className="reveal reveal-delay-1 bg-white rounded-3xl p-8 flex flex-col scroll-mt-24">
             <div className="mb-6">
               <div className="w-12 h-12 rounded-2xl bg-[#F8F9FF] flex items-center justify-center mb-4">
                 <svg viewBox="0 0 24 24" fill="none" stroke="#0061FC" strokeWidth="1.8" className="w-6 h-6">
