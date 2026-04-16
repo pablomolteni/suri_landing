@@ -883,15 +883,15 @@ function DiagContact() {
             <div>
               <div className="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center mb-6">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-6 h-6 text-white">
-                  <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+                  <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold mb-3">Agendá una reunión</h3>
+              <h3 className="text-2xl font-bold mb-3">Hacé el diagnóstico inicial</h3>
               <p className="text-white/70 text-sm leading-relaxed mb-6">
-                Reservá un espacio para una llamada de 30 minutos. Evaluamos si el diagnóstico es adecuado para tu empresa.
+                Respondé las preguntas iniciales sobre tu empresa y obtené un mapa de tu adopción tecnológica en minutos. Sin reuniones, sin compromisos.
               </p>
               <ul className="flex flex-col gap-3">
-                {['30 minutos, sin compromiso', 'Evaluamos si el diagnóstico es para vos', 'Respondemos todas tus preguntas'].map(item => (
+                {['Menos de 20 minutos', 'Resultados inmediatos y personalizados', 'Sin registrarse ni dar datos de pago'].map(item => (
                   <li key={item} className="flex items-center gap-3 text-sm text-white/80">
                     <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-3 h-3">
@@ -904,12 +904,12 @@ function DiagContact() {
               </ul>
             </div>
             <a
-              href={SCHEDULING_URL}
+              href="https://diagnostico.suri.lat"
               target="_blank"
               rel="noopener noreferrer"
               className="w-full text-center py-4 rounded-xl bg-white text-[#0061FC] font-bold text-sm hover:scale-[1.02] transition-transform duration-200 shadow-lg"
             >
-              Hablemos →
+              Empezar diagnóstico →
             </a>
           </div>
 
