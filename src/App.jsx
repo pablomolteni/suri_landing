@@ -687,14 +687,14 @@ function DiagQueEs() {
           <p className="reveal text-[#0061FC] font-semibold tracking-widest text-sm uppercase mb-4">El diagnóstico</p>
           <h2 className="reveal text-4xl md:text-5xl font-extrabold text-[#0D0D0D]">
             Un diagnóstico profesional,<br />
-            <span className="gradient-text">no una encuesta genérica</span>
+            <span className="gradient-text">con acciones concretas</span>
           </h2>
           <p className="reveal text-gray-500 mt-4 max-w-2xl mx-auto text-lg leading-relaxed">
             Evaluación integral que combina datos cuantitativos —cuestionario a múltiples niveles de la organización— con análisis cualitativo de nuestro equipo a través de entrevistas en profundidad.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
           {dimensions.map((d, i) => (
             <div key={d.title} className={`reveal reveal-delay-${(i % 4) + 1} bg-[#F8F9FF] rounded-2xl p-5 hover:shadow-md transition-shadow duration-300`}>
               <div className="w-3 h-3 rounded-full mb-3" style={{ background: d.color }} />
