@@ -619,7 +619,7 @@ function DiagHero() {
           {/* Left — copy */}
           <div className="text-white">
             <div className="animate-fade-up flex flex-wrap gap-3 mb-8">
-              {['DIAGNÓSTICO', 'MADUREZ DIGITAL', 'PYMES'].map(tag => (
+              {['DIAGNÓSTICO', 'ADOPCION TECNOLOGICA', 'PYMES'].map(tag => (
                 <span key={tag} className="px-4 py-1.5 rounded-full border border-white/30 text-sm font-semibold tracking-widest">
                   {tag}
                 </span>
@@ -778,7 +778,7 @@ function DiagComoFunciona() {
 /* ─── Diag Entregables ─── */
 function DiagEntregables() {
   const items = [
-    { title: 'Puntaje global de madurez digital', desc: 'Nivel 1 a 4, con descripción de lo que significa para tu organización.' },
+    { title: 'Puntaje global de adopción tecnológica', desc: 'Nivel 1 a 4, con descripción de lo que significa para tu organización.' },
     { title: 'Gráfico de araña por dimensión', desc: 'Visualización de scores en las 8 dimensiones evaluadas.' },
     { title: 'Análisis de brecha dirección-operativos', desc: 'Diferencias de percepción entre niveles jerárquicos.' },
     { title: 'Hallazgos cualitativos', desc: 'Voces anonimizadas de la organización que enriquecen el análisis.' },
@@ -853,7 +853,7 @@ function DiagContact() {
         body: JSON.stringify({
           name: form.name,
           email: form.email,
-          message: `[Diagnóstico de Madurez Digital]\n\n${form.message}`,
+          message: `[Diagnóstico de Adopción Tecnológica]\n\n${form.message}`,
         }),
       })
       if (res.ok) { setStatus('ok'); setForm({ name: '', email: '', message: '' }) }
@@ -871,7 +871,7 @@ function DiagContact() {
         <div className="text-center text-white mb-14">
           <p className="reveal text-white/70 font-semibold tracking-widest text-sm uppercase mb-4">¿Listo para medir?</p>
           <h2 className="reveal text-4xl md:text-5xl font-extrabold mb-4 leading-tight">
-            ¿Listo para medir tu madurez digital?
+            ¿Listo para medir tu adopción tecnológica?
           </h2>
           <p className="reveal text-white/75 text-lg max-w-xl mx-auto">
             Contactanos para coordinar el diagnóstico de tu empresa. En menos de un mes vas a tener un mapa claro de dónde estás y hacia dónde ir.
