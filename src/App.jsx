@@ -619,7 +619,7 @@ function DiagHero() {
           {/* Left — copy */}
           <div className="text-white">
             <div className="animate-fade-up flex flex-wrap gap-3 mb-8">
-              {['DIAGNÓSTICO', 'ADOPCION TECNOLOGICA', 'PYMES'].map(tag => (
+              {['DIAGNÓSTICO', 'ADOPCIÓN TECNOLÓGICA', 'PYMES'].map(tag => (
                 <span key={tag} className="px-4 py-1.5 rounded-full border border-white/30 text-sm font-semibold tracking-widest">
                   {tag}
                 </span>
@@ -631,7 +631,7 @@ function DiagHero() {
             </h1>
 
             <p className="animate-fade-up-delay-2 text-lg md:text-xl font-medium text-white/80 mb-10">
-              Nuestro diagnóstico evalúa 8 dimensiones clave de tu organización y te entrega un plan de acción concreto para mejorar.
+              Nuestro diagnóstico evalúa 6 dimensiones clave de tu organización y te entrega un plan de acción concreto para mejorar.
             </p>
 
             <div className="animate-fade-up-delay-3 flex flex-wrap gap-4">
@@ -672,14 +672,12 @@ function DiagHero() {
 /* ─── Diag Qué es ─── */
 function DiagQueEs() {
   const dimensions = [
-    { title: 'Adopción de Inteligencia Artificial', color: '#0061FC' },
-    { title: 'Estrategia y Liderazgo Digital', color: '#0061FC' },
-    { title: 'Seguridad Informática y Privacidad', color: '#A37EF7' },
-    { title: 'Automatización de Procesos', color: '#A37EF7' },
-    { title: 'Cultura del Dato', color: '#A37EF7' },
-    { title: 'Infraestructura y Herramientas', color: '#F58CF5' },
-    { title: 'Capacidades Humanas', color: '#F58CF5' },
-    { title: 'Marketing y Presencia Digital', color: '#F58CF5' },
+    { title: 'Operaciones y Ejecución', color: '#0061FC' },
+    { title: 'Marketing y Ventas', color: '#0061FC' },
+    { title: 'Administración de Recursos', color: '#A37EF7' },
+    { title: 'Madurez Digital y Disposición al Cambio', color: '#A37EF7' },
+    { title: 'Gestión del Conocimiento y Comunicación Interna', color: '#F58CF5' },
+    { title: 'Seguridad y Cumplimiento', color: '#F58CF5' },
   ]
 
   return (
@@ -826,7 +824,7 @@ function DiagEntregables() {
           {/* Right — screenshot */}
           <div className="reveal">
             <div className="rounded-2xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
-              <img src="/scoring_2.png" alt="Detalle por dimensión" className="w-full" />
+              <img src="/scoring_5.png" alt="Detalle por dimensión" className="w-full" />
             </div>
           </div>
 
@@ -874,7 +872,7 @@ function DiagContact() {
             ¿Listo para medir tu adopción tecnológica?
           </h2>
           <p className="reveal text-white/75 text-lg max-w-xl mx-auto">
-            Contactanos para coordinar el diagnóstico de tu empresa. En menos de un mes vas a tener un mapa claro de dónde estás y hacia dónde ir.
+            Contactanos para coordinar el diagnóstico de tu empresa. En menos de un mes vamos a estar cambiando la forma de trabajar en tu empresa.
           </p>
         </div>
 
