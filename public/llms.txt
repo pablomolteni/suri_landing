@@ -1,0 +1,18 @@
+# SURI
+
+> SURI es una consultora de inteligencia artificial y automatización de procesos con base en Buenos Aires, Argentina. Ayuda a pymes y empresas de todo el país y Latinoamérica a automatizar tareas repetitivas, capacitar a sus equipos en IA y medir su madurez digital.
+
+SURI trabaja con un enfoque consultivo: primero entiende la operación de la empresa y después propone soluciones medibles. Sus principios son: claro, ordenado y medible. Herramientas con las que trabaja: n8n, Make, Zapier, OpenAI, ChatGPT, Claude y Google Workspace.
+
+## Servicios
+
+- [Automatización de procesos con IA](https://www.suri.lat/automatizacion-de-procesos): diseño, implementación y mantenimiento de flujos automáticos para administración, ventas y CRM, atención al cliente, operaciones, documentos y reportes. También ofrece mentoría técnica para equipos que desarrollan sus propias automatizaciones.
+- [Capacitación en inteligencia artificial para empresas](https://www.suri.lat/capacitacion-ia): capacitación 80% práctica para equipos no técnicos, con ejemplos del propio trabajo. Curso general de IA aplicada (3 jornadas), cursos a medida por área y kit de recursos. Presencial en Buenos Aires o virtual, grupos de hasta 15 personas.
+- [Diagnóstico de madurez digital](https://www.suri.lat/diagnostico): evaluación de 6 dimensiones de la organización mediante cuestionarios por rol, entrevistas en profundidad y análisis externo. Entrega un informe ejecutivo, un puntaje de adopción tecnológica y un roadmap priorizado en 3 horizontes (0–3, 3–9 y 9–18 meses).
+
+## Contacto
+
+- Sitio web: https://www.suri.lat
+- Email: info@suri.lat
+- LinkedIn: https://www.linkedin.com/company/suri-ia/
+- Diagnóstico inicial online: https://diagnostico.suri.lat

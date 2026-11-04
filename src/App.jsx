@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import logoHColor from './assets/logos/logo-h-color.svg'
 import logoHBlanco from './assets/logos/logo-h-blanco.svg'
+import { track } from './analytics.js'
 import { automatizacionFaqs, capacitacionFaqs, diagnosticoFaqs } from './content/faqs.js'
 
 /* ─── Scroll reveal hook ─── */
@@ -677,7 +678,10 @@ function Contact({
           message: source ? `[${source}]\n\n${form.message}` : form.message,
         }),
       })
-      if (res.ok) { setStatus('ok'); setForm({ name: '', email: '', message: '' }) }
+      if (res.ok) {
+        setStatus('ok'); setForm({ name: '', email: '', message: '' })
+        track('generate_lead', { form_name: source || 'Contacto general', page_path: window.location.pathname })
+      }
       else setStatus('error')
     } catch { setStatus('error') }
   }
@@ -726,6 +730,7 @@ function Contact({
             </div>
             <a
               href={SCHEDULING_URL}
+              onClick={() => track('schedule_call_click', { page_path: window.location.pathname })}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full text-center py-4 rounded-xl bg-white text-[#0061FC] font-bold text-sm hover:scale-[1.02] transition-transform duration-200 shadow-lg"
@@ -1042,7 +1047,10 @@ function DiagContact() {
           message: `[Diagnóstico de Adopción Tecnológica]\n\n${form.message}`,
         }),
       })
-      if (res.ok) { setStatus('ok'); setForm({ name: '', email: '', message: '' }) }
+      if (res.ok) {
+        setStatus('ok'); setForm({ name: '', email: '', message: '' })
+        track('generate_lead', { form_name: 'Diagnóstico', page_path: window.location.pathname })
+      }
       else setStatus('error')
     } catch { setStatus('error') }
   }
@@ -1091,6 +1099,7 @@ function DiagContact() {
             </div>
             <a
               href="https://diagnostico.suri.lat"
+              onClick={() => track('start_diagnostic_click', { page_path: window.location.pathname })}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full text-center py-4 rounded-xl bg-white text-[#0061FC] font-bold text-sm hover:scale-[1.02] transition-transform duration-200 shadow-lg"
