@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import logoHColor from './assets/logos/logo-h-color.svg'
 import logoHBlanco from './assets/logos/logo-h-blanco.svg'
+import { automatizacionFaqs, capacitacionFaqs, diagnosticoFaqs } from './content/faqs.js'
 
 /* ─── Scroll reveal hook ─── */
 function useReveal() {
@@ -30,6 +31,7 @@ function Navbar() {
   const location = useLocation()
   const isHome = location.pathname === '/'
   const isDiag = location.pathname === '/diagnostico'
+  const hasContact = ['/', '/automatizacion-de-procesos', '/capacitacion-ia'].includes(location.pathname)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -41,9 +43,10 @@ function Navbar() {
     { label: 'Servicios', href: isHome ? '#servicios' : '/#servicios' },
     { label: 'Cómo trabajamos', href: isHome ? '#proceso' : '/#proceso' },
     { label: 'Para quién', href: isHome ? '#audiencia' : '/#audiencia' },
+    { label: 'Diagnóstico', href: '/diagnostico' },
   ]
 
-  const ctaHref = isDiag ? '#contacto-diagnostico' : isHome ? '#contacto' : '/#contacto'
+  const ctaHref = isDiag ? '#contacto-diagnostico' : hasContact ? '#contacto' : '/#contacto'
   const ctaLabel = isDiag ? 'Solicitar diagnóstico' : 'Hablemos'
 
   return (
@@ -54,7 +57,7 @@ function Navbar() {
         </a>
 
         {/* Desktop links */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-6 lg:gap-8">
           {links.map(l => (
             <a
               key={l.href}
@@ -102,14 +105,202 @@ function Navbar() {
 
 /* ─── Footer ─── */
 function Footer() {
+  const services = [
+    { label: 'Automatización de procesos', href: '/automatizacion-de-procesos' },
+    { label: 'Capacitación en IA', href: '/capacitacion-ia' },
+    { label: 'Diagnóstico de madurez digital', href: '/diagnostico' },
+  ]
+
   return (
-    <footer className="bg-[#0D0D14] py-8 px-6">
-      <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-        <img src={logoHBlanco} alt="SURI" className="h-6 w-auto" />
-        <p className="text-gray-400 text-xs">© {new Date().getFullYear()} SURI. Todos los derechos reservados.</p>
-        <p className="text-gray-400 text-xs">Hecho con intención, no solo con IA.</p>
+    <footer className="bg-[#0D0D14] pt-12 pb-8 px-6">
+      <div className="max-w-6xl mx-auto">
+        <div className="grid gap-8 sm:grid-cols-3 mb-10">
+          <div>
+            <img src={logoHBlanco} alt="SURI" className="h-6 w-auto mb-4" />
+            <p className="text-gray-400 text-sm leading-relaxed">Automatización de procesos e IA para empresas.</p>
+            <p className="text-gray-400 text-sm mt-1">Buenos Aires, Argentina</p>
+          </div>
+          <div>
+            <p className="text-white text-sm font-semibold mb-3">Servicios</p>
+            <ul className="flex flex-col gap-2">
+              {services.map(s => (
+                <li key={s.href}>
+                  <a href={s.href} className="text-gray-400 text-sm hover:text-white transition-colors">{s.label}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <p className="text-white text-sm font-semibold mb-3">Contacto</p>
+            <ul className="flex flex-col gap-2">
+              <li><a href="mailto:info@suri.lat" className="text-gray-400 text-sm hover:text-white transition-colors">info@suri.lat</a></li>
+              <li><a href="https://www.linkedin.com/company/suri-ia/" target="_blank" rel="noopener noreferrer" className="text-gray-400 text-sm hover:text-white transition-colors">LinkedIn</a></li>
+            </ul>
+          </div>
+        </div>
+        <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-2">
+          <p className="text-gray-400 text-xs">© {new Date().getFullYear()} SURI. Todos los derechos reservados.</p>
+          <p className="text-gray-400 text-xs">Hecho con intención, no solo con IA.</p>
+        </div>
       </div>
     </footer>
+  )
+}
+
+/* ══════════════════════════════════════════════
+   SHARED SECTIONS
+   ══════════════════════════════════════════════ */
+
+/* ─── Page hero (service pages) ─── */
+function PageHero({ tags, title, subtitle, primary, secondary }) {
+  return (
+    <section className="relative min-h-[80vh] flex items-center overflow-hidden noise">
+      <div className="absolute inset-0 gradient-bg" />
+      <div className="absolute top-1/4 right-0 w-96 h-96 rounded-full bg-white/10 blur-3xl animate-float" />
+      <div className="absolute bottom-1/4 left-0 w-80 h-80 rounded-full bg-white/10 blur-3xl" style={{ animationDelay: '2s' }} />
+
+      <div className="relative max-w-6xl mx-auto px-6 py-32 text-white w-full">
+        <div className="max-w-3xl">
+          <div className="animate-fade-up flex flex-wrap gap-3 mb-8">
+            {tags.map(tag => (
+              <span key={tag} className="px-4 py-1.5 rounded-full border border-white/30 text-sm font-semibold tracking-widest">
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          <h1 className="animate-fade-up-delay-1 text-4xl md:text-6xl font-extrabold leading-[1.05] mb-6">
+            {title}
+          </h1>
+
+          <p className="animate-fade-up-delay-2 text-lg md:text-xl font-medium text-white/80 mb-10 max-w-2xl">
+            {subtitle}
+          </p>
+
+          <div className="animate-fade-up-delay-3 flex flex-wrap gap-4">
+            <a href={primary.href} className="px-8 py-4 rounded-full bg-white text-[#0061FC] font-bold text-base hover:scale-105 transition-transform duration-200 shadow-lg">
+              {primary.label}
+            </a>
+            <a href={secondary.href} className="px-8 py-4 rounded-full border border-white/40 text-white font-semibold text-base hover:bg-white/10 transition-all duration-200">
+              {secondary.label}
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ─── Section header ─── */
+function SectionHeader({ eyebrow, title, subtitle, dark = false }) {
+  return (
+    <div className="text-center mb-16">
+      <p className={`reveal font-semibold tracking-widest text-sm uppercase mb-4 ${dark ? 'text-[#A37EF7]' : 'text-[#0061FC]'}`}>{eyebrow}</p>
+      <h2 className={`reveal text-4xl md:text-5xl font-extrabold leading-tight ${dark ? 'text-white' : 'text-[#0D0D0D]'}`}>{title}</h2>
+      {subtitle && (
+        <p className={`reveal mt-4 max-w-2xl mx-auto text-lg leading-relaxed ${dark ? 'text-gray-400' : 'text-gray-500'}`}>{subtitle}</p>
+      )}
+    </div>
+  )
+}
+
+/* ─── Text with inline [text](/path) links ─── */
+function RichText({ text }) {
+  const parts = text.split(/(\[[^\]]+\]\([^)]+\))/g)
+  return parts.map((part, i) => {
+    const m = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/)
+    return m
+      ? <a key={i} href={m[2]} className="text-[#0061FC] font-semibold hover:underline">{m[1]}</a>
+      : part
+  })
+}
+
+/* ─── Problem statement (dark band) ─── */
+function ProblemSection({ eyebrow, title, paragraphs }) {
+  return (
+    <section className="bg-[#0D0D14] py-24 relative overflow-hidden">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-[#A37EF7]/40 to-transparent" />
+      <div className="max-w-3xl mx-auto px-6">
+        <SectionHeader eyebrow={eyebrow} title={title} dark />
+        <div className="flex flex-col gap-5 -mt-8">
+          {paragraphs.map(p => (
+            <p key={p} className="reveal text-gray-400 text-lg leading-relaxed">{p}</p>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ─── Card grid ─── */
+function CardGrid({ items, cardBg = 'bg-[#F8F9FF]', cols = 'lg:grid-cols-3' }) {
+  const colors = ['#0061FC', '#A37EF7', '#F58CF5']
+  return (
+    <div className={`grid grid-cols-1 sm:grid-cols-2 ${cols} gap-4`}>
+      {items.map((item, i) => (
+        <div key={item.title} className={`reveal reveal-delay-${(i % 3) + 1} ${cardBg} rounded-2xl p-6 hover:shadow-md transition-shadow duration-300`}>
+          <div className="w-3 h-3 rounded-full mb-4" style={{ background: colors[i % 3] }} />
+          <h3 className="font-bold text-[#0D0D0D] text-lg mb-2">{item.title}</h3>
+          <p className="text-gray-500 text-sm leading-relaxed"><RichText text={item.desc} /></p>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+/* ─── Numbered steps ─── */
+function StepsSection({ id, eyebrow, title, subtitle, steps, footerTitle, footerText, bg = 'bg-white' }) {
+  const gridCols = { 3: 'md:grid-cols-3', 4: 'md:grid-cols-4' }[steps.length]
+  const inset = `${50 / steps.length}%`
+
+  return (
+    <section id={id} className={`py-24 ${bg}`}>
+      <div className="max-w-6xl mx-auto px-6">
+        <SectionHeader eyebrow={eyebrow} title={title} subtitle={subtitle} />
+
+        <div className={`relative grid ${gridCols} gap-8`}>
+          <div className="hidden md:block absolute h-0.5 bg-gradient-to-r from-[#0061FC] via-[#A37EF7] to-[#F58CF5]"
+            style={{ top: '40px', left: inset, right: inset }}
+          />
+          {steps.map((s, i) => (
+            <div key={s.title} className={`reveal reveal-delay-${i + 1} relative text-center`}>
+              <div className="w-20 h-20 rounded-full gradient-bg flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-lg relative z-10">
+                {i + 1}
+              </div>
+              <h3 className="font-bold text-[#0D0D0D] text-lg mb-3">{s.title}</h3>
+              <p className="text-gray-500 text-sm leading-relaxed">{s.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="reveal mt-14 text-center">
+          <p className="text-[#0061FC] font-bold tracking-widest text-sm uppercase">{footerTitle}</p>
+          <p className="text-gray-500 text-sm mt-2">{footerText}</p>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ─── FAQ ─── */
+function FaqSection({ faqs, bg = 'bg-white' }) {
+  return (
+    <section id="preguntas-frecuentes" className={`py-24 ${bg}`}>
+      <div className="max-w-3xl mx-auto px-6">
+        <SectionHeader eyebrow="FAQ" title={<>Preguntas <span className="gradient-text">frecuentes</span></>} />
+        <div className="flex flex-col gap-3">
+          {faqs.map(f => (
+            <details key={f.q} className="reveal group bg-[#F8F9FF] rounded-2xl px-6 py-5 open:shadow-md transition-shadow duration-300">
+              <summary className="flex items-center justify-between gap-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden font-bold text-[#0D0D0D]">
+                <h3 className="text-base">{f.q}</h3>
+                <span className="text-[#A37EF7] text-xl leading-none transition-transform duration-200 group-open:rotate-45" aria-hidden="true">+</span>
+              </summary>
+              <p className="text-gray-600 text-sm leading-relaxed mt-3"><RichText text={f.a} /></p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
   )
 }
 
@@ -140,7 +331,7 @@ function Hero() {
           </h1>
 
           <p className="animate-fade-up-delay-2 text-xl md:text-2xl font-medium text-white/80 mb-10 max-w-xl">
-            Convertimos procesos manuales en sistemas automáticos, eficientes y escalables. Sin complejidad técnica.
+            Convertimos procesos manuales en sistemas automáticos, eficientes y escalables. Sin complejidad técnica. Desde Buenos Aires, para empresas de todo el país y Latinoamérica.
           </p>
 
           <div className="animate-fade-up-delay-3 flex flex-wrap gap-4">
@@ -289,6 +480,7 @@ function Services() {
         { label: 'Kit de recursos', desc: 'Consejos, herramientas e ideas que el equipo puede aplicar de inmediato.' },
       ],
       cta: 'Quiero capacitar a mi equipo',
+      ctaHref: '/capacitacion-ia',
       featured: false,
       mobileOrder: 2,
     },
@@ -298,11 +490,12 @@ function Services() {
       tagline: 'Automatizaciones reales, funcionando en tu operación.',
       summary: 'Construimos e implementamos los flujos automáticos. También acompañamos a tu equipo si quieren desarrollarlos ellos mismos.',
       details: [
-        { label: 'Desarrollo SURI', desc: 'Nosotros diseñamos, construimos e implementamos la automatización. Cobramos por horas de desarrollo.' },
+        { label: 'Desarrollo SURI', desc: 'Nosotros diseñamos, construimos e implementamos la automatización.' },
         { label: 'Mentoría técnica', desc: 'Tu equipo desarrolla la automatización y nosotros los acompañamos hora a hora.' },
-        { label: 'Mantenimiento continuo', desc: 'Fee mensual de mantenimiento sobre las implementaciones realizadas por SURI.' },
+        { label: 'Mantenimiento continuo', desc: 'Nos ocupamos de que las implementaciones realizadas por SURI sigan funcionando.' },
       ],
       cta: 'Quiero implementar',
+      ctaHref: '/automatizacion-de-procesos',
       featured: true,
       mobileOrder: 1,
     },
@@ -400,39 +593,15 @@ function HowWeWork() {
   ]
 
   return (
-    <section id="proceso" className="py-24 bg-white">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="text-center mb-16">
-          <p className="reveal text-[#0061FC] font-semibold tracking-widest text-sm uppercase mb-4">Metodología</p>
-          <h2 className="reveal text-4xl md:text-5xl font-extrabold text-[#0D0D0D]">
-            ¿Cómo <span className="gradient-text">trabajamos?</span>
-          </h2>
-          <p className="reveal text-gray-500 mt-4 max-w-lg mx-auto text-lg">
-            Un proceso claro en tres pasos. Ordenado, medible y sin sorpresas.
-          </p>
-        </div>
-
-        <div className="relative grid md:grid-cols-3 gap-8">
-          <div className="hidden md:block absolute h-0.5 bg-gradient-to-r from-[#0061FC] via-[#A37EF7] to-[#F58CF5]"
-            style={{ top: '40px', left: 'calc(16.67%)', right: 'calc(16.67%)' }}
-          />
-          {steps.map((s, i) => (
-            <div key={s.num} className={`reveal reveal-delay-${i + 1} relative text-center`}>
-              <div className="w-20 h-20 rounded-full gradient-bg flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-lg relative z-10">
-                {s.num}
-              </div>
-              <h3 className="font-bold text-[#0D0D0D] text-lg mb-3">{s.title}</h3>
-              <p className="text-gray-500 text-sm leading-relaxed">{s.desc}</p>
-            </div>
-          ))}
-        </div>
-
-        <div className="reveal mt-14 text-center">
-          <p className="text-[#0061FC] font-bold tracking-widest text-sm uppercase">Claro · Ordenado · Medible</p>
-          <p className="text-gray-500 text-sm mt-2">Cada proyecto tiene métricas definidas, plazos concretos y entregables tangibles que podés evaluar.</p>
-        </div>
-      </div>
-    </section>
+    <StepsSection
+      id="proceso"
+      eyebrow="Metodología"
+      title={<>¿Cómo <span className="gradient-text">trabajamos?</span></>}
+      subtitle="Un proceso claro en tres pasos. Ordenado, medible y sin sorpresas."
+      steps={steps}
+      footerTitle="Claro · Ordenado · Medible"
+      footerText="Cada proyecto tiene métricas definidas, plazos concretos y entregables tangibles que podés evaluar."
+    />
   )
 }
 
@@ -484,7 +653,12 @@ function ForWhom() {
 /* ─── CTA / Contact ─── */
 const SCHEDULING_URL = 'https://calendar.app.google/wd3pFyhNQ5cvne6e9'
 
-function Contact() {
+function Contact({
+  eyebrow = '¿Listo para escalar?',
+  title = 'Empecemos a trabajar juntos.',
+  subtitle = 'Elegí cómo querés conectar con nosotros.',
+  source,
+}) {
   const [form, setForm] = useState({ name: '', email: '', message: '' })
   const [status, setStatus] = useState(null)
 
@@ -497,7 +671,11 @@ function Contact() {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: form.name, email: form.email, message: form.message }),
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          message: source ? `[${source}]\n\n${form.message}` : form.message,
+        }),
       })
       if (res.ok) { setStatus('ok'); setForm({ name: '', email: '', message: '' }) }
       else setStatus('error')
@@ -512,12 +690,12 @@ function Contact() {
 
       <div className="relative max-w-5xl mx-auto px-6">
         <div className="text-center text-white mb-14">
-          <p className="reveal text-white/70 font-semibold tracking-widest text-sm uppercase mb-4">¿Listo para escalar?</p>
+          <p className="reveal text-white/70 font-semibold tracking-widest text-sm uppercase mb-4">{eyebrow}</p>
           <h2 className="reveal text-4xl md:text-5xl font-extrabold mb-4 leading-tight">
-            Empecemos a trabajar juntos.
+            {title}
           </h2>
           <p className="reveal text-white/75 text-lg max-w-lg mx-auto">
-            Elegí cómo querés conectar con nosotros.
+            {subtitle}
           </p>
         </div>
 
@@ -625,7 +803,7 @@ function DiagHero() {
           {/* Left — copy */}
           <div className="text-white">
             <div className="animate-fade-up flex flex-wrap gap-3 mb-8">
-              {['DIAGNÓSTICO', 'ADOPCIÓN TECNOLÓGICA', 'PYMES'].map(tag => (
+              {['DIAGNÓSTICO', 'MADUREZ DIGITAL', 'PYMES'].map(tag => (
                 <span key={tag} className="px-4 py-1.5 rounded-full border border-white/30 text-sm font-semibold tracking-widest">
                   {tag}
                 </span>
@@ -637,7 +815,7 @@ function DiagHero() {
             </h1>
 
             <p className="animate-fade-up-delay-2 text-lg md:text-xl font-medium text-white/80 mb-10">
-              Nuestro diagnóstico evalúa 6 dimensiones clave de tu organización y te entrega un plan de acción concreto para mejorar.
+              Nuestro diagnóstico de madurez digital evalúa 6 dimensiones clave de tu organización, mide la adopción real de tecnología e IA, y te entrega un plan de acción concreto para mejorar.
             </p>
 
             <div className="animate-fade-up-delay-3 flex flex-wrap gap-4">
@@ -745,39 +923,16 @@ function DiagComoFunciona() {
   ]
 
   return (
-    <section id="como-funciona" className="py-24 bg-[#F8F9FF]">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="text-center mb-16">
-          <p className="reveal text-[#0061FC] font-semibold tracking-widest text-sm uppercase mb-4">Metodología</p>
-          <h2 className="reveal text-4xl md:text-5xl font-extrabold text-[#0D0D0D]">
-            ¿Cómo <span className="gradient-text">lo hacemos?</span>
-          </h2>
-          <p className="reveal text-gray-500 mt-4 max-w-lg mx-auto text-lg">
-            Cuatro pasos claros, ordenados y sin sorpresas.
-          </p>
-        </div>
-
-        <div className="relative grid md:grid-cols-4 gap-8">
-          <div className="hidden md:block absolute h-0.5 bg-gradient-to-r from-[#0061FC] via-[#A37EF7] to-[#F58CF5]"
-            style={{ top: '40px', left: 'calc(12.5%)', right: 'calc(12.5%)' }}
-          />
-          {steps.map((s, i) => (
-            <div key={s.num} className={`reveal reveal-delay-${i + 1} relative text-center`}>
-              <div className="w-20 h-20 rounded-full gradient-bg flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-lg relative z-10">
-                {s.num}
-              </div>
-              <h3 className="font-bold text-[#0D0D0D] text-lg mb-3">{s.title}</h3>
-              <p className="text-gray-500 text-sm leading-relaxed">{s.desc}</p>
-            </div>
-          ))}
-        </div>
-
-        <div className="reveal mt-14 text-center">
-          <p className="text-[#0061FC] font-bold tracking-widest text-sm uppercase">Claro · Ordenado · Medible</p>
-          <p className="text-gray-500 text-sm mt-2">Cada etapa tiene responsables definidos y entregables concretos que podés evaluar.</p>
-        </div>
-      </div>
-    </section>
+    <StepsSection
+      id="como-funciona"
+      bg="bg-[#F8F9FF]"
+      eyebrow="Metodología"
+      title={<>¿Cómo <span className="gradient-text">lo hacemos?</span></>}
+      subtitle="Cuatro pasos claros, ordenados y sin sorpresas."
+      steps={steps}
+      footerTitle="Claro · Ordenado · Medible"
+      footerText="Cada etapa tiene responsables definidos y entregables concretos que podés evaluar."
+    />
   )
 }
 
@@ -837,6 +992,31 @@ function DiagEntregables() {
           </div>
 
         </div>
+      </div>
+    </section>
+  )
+}
+
+/* ─── Diag Más que un autodiagnóstico ─── */
+function DiagAutodiagnostico() {
+  const views = [
+    { title: 'Cuestionario por rol', desc: 'Dirección, mandos medios y operativos responden por separado, y comparamos sus respuestas.' },
+    { title: 'Entrevistas en profundidad', desc: 'Nuestro equipo conversa con personas clave para entender el porqué detrás de los números.' },
+    { title: 'Análisis externo', desc: 'Cruzamos todo con nuestra experiencia para detectar brechas que desde adentro cuesta ver.' },
+  ]
+
+  return (
+    <section className="py-24 bg-[#F8F9FF]">
+      <div className="max-w-6xl mx-auto px-6">
+        <SectionHeader
+          eyebrow="Nuestro enfoque"
+          title={<>Más que un <span className="gradient-text">autodiagnóstico</span></>}
+          subtitle="Los cuestionarios de autodiagnóstico son un buen primer paso, pero tienen un límite: muestran cómo se percibe la empresa a sí misma, y esa percepción no siempre coincide con la realidad. Por eso nuestro diagnóstico combina tres miradas."
+        />
+        <CardGrid items={views} cardBg="bg-white" />
+        <p className="reveal text-center text-gray-600 text-lg font-medium mt-10 max-w-2xl mx-auto">
+          El resultado no es un puntaje para archivar, sino una hoja de ruta con iniciativas priorizadas.
+        </p>
       </div>
     </section>
   )
@@ -995,9 +1175,201 @@ function DiagnosticoPage() {
     <>
       <DiagHero />
       <DiagEntregables />
+      <DiagAutodiagnostico />
       <DiagComoFunciona />
       <DiagQueEs />
+      <FaqSection faqs={diagnosticoFaqs} bg="bg-white" />
       <DiagContact />
+    </>
+  )
+}
+
+/* ══════════════════════════════════════════════
+   SERVICE PAGES
+   ══════════════════════════════════════════════ */
+
+/* ─── Callout with inline links ─── */
+function Callout({ title, text, bg = 'bg-white' }) {
+  return (
+    <section className={`py-16 ${bg}`}>
+      <div className="max-w-3xl mx-auto px-6">
+        <div className="reveal rounded-3xl p-8 md:p-10 bg-gradient-suri-soft border border-[#A37EF7]/20 text-center">
+          <h2 className="text-2xl md:text-3xl font-extrabold text-[#0D0D0D] mb-4">{title}</h2>
+          <p className="text-gray-600 text-lg leading-relaxed"><RichText text={text} /></p>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function AutomatizacionPage() {
+  useReveal()
+
+  const areas = [
+    { title: 'Administración y facturación', desc: 'Carga de comprobantes, conciliaciones, recordatorios de cobro y reportes que hoy se arman a mano.' },
+    { title: 'Ventas y CRM', desc: 'Registro automático de leads, seguimiento de oportunidades y asignación de consultas al vendedor que corresponde.' },
+    { title: 'Atención al cliente', desc: 'Respuestas iniciales a consultas frecuentes, derivación al área correcta y asistentes con IA.' },
+    { title: 'Operaciones', desc: 'Alertas de stock, actualización de planillas y sincronización entre sistemas que hoy no se hablan.' },
+    { title: 'Documentos e información interna', desc: 'Clasificación de documentos, extracción de datos de PDFs y mails, y resúmenes automáticos con IA.' },
+    { title: 'Reportes', desc: 'Tableros que se actualizan solos, en lugar de consolidar planillas cada semana.' },
+  ]
+
+  const tools = ['n8n', 'Make', 'Zapier', 'OpenAI', 'ChatGPT', 'Claude', 'Google Workspace']
+
+  const modes = [
+    { title: 'Desarrollo SURI', desc: 'Nosotros diseñamos, construimos e implementamos la automatización de punta a punta. Te entregamos el flujo funcionando, documentado y medido.' },
+    { title: 'Mentoría técnica', desc: 'Si tu empresa tiene gente con ganas de desarrollar sus propias automatizaciones, los acompañamos: revisamos el diseño, destrabamos problemas y transferimos el conocimiento para que el equipo gane autonomía.' },
+    { title: 'Mantenimiento continuo', desc: 'Las automatizaciones necesitan ajustes cuando cambian los procesos o las herramientas. Nos ocupamos de que todo lo que implementamos siga funcionando.' },
+  ]
+
+  const steps = [
+    { title: 'Identificamos tareas repetitivas', desc: 'Analizamos tu operación y mapeamos los procesos que consumen tiempo sin aportar valor diferencial. Priorizamos por impacto y facilidad de implementación.' },
+    { title: 'Diseñamos flujos inteligentes', desc: 'Definimos qué se automatiza, cómo se conecta con tus sistemas actuales y qué métricas vamos a medir para saber si funcionó.' },
+    { title: 'Implementamos y escalamos', desc: 'Ponemos los flujos en producción, medimos el impacto real y escalamos lo que funciona.' },
+  ]
+
+  return (
+    <>
+      <PageHero
+        tags={['IMPLEMENTACIÓN']}
+        title="Automatización de procesos con IA para pymes"
+        subtitle="Convertimos las tareas manuales que frenan a tu equipo en flujos automáticos que funcionan solos. Vos definís qué querés resolver; lo diseñamos, lo construimos y lo dejamos funcionando."
+        primary={{ label: 'Quiero automatizar', href: '#contacto' }}
+        secondary={{ label: 'Ver cómo trabajamos', href: '#proceso' }}
+      />
+      <ProblemSection
+        eyebrow="El problema"
+        title={<>Tu equipo no debería estar <span className="gradient-text">copiando datos de un lado a otro</span></>}
+        paragraphs={[
+          'En la mayoría de las pymes hay horas que se van todos los días en tareas que no necesitan criterio humano: pasar pedidos de un sistema a otro, cargar facturas, responder siempre las mismas consultas, armar el mismo reporte cada lunes. Son tareas necesarias, pero no hacen crecer a la empresa.',
+          'Automatizarlas no requiere cambiar todos tus sistemas ni contratar un equipo técnico. Requiere entender bien el proceso, elegir la herramienta correcta y conectarla con lo que ya usás.',
+        ]}
+      />
+      <section className="py-24 bg-white">
+        <div className="max-w-6xl mx-auto px-6">
+          <SectionHeader
+            eyebrow="Qué automatizamos"
+            title={<>Procesos que automatizamos en <span className="gradient-text">empresas como la tuya</span></>}
+          />
+          <CardGrid items={areas} />
+          <div className="reveal mt-12 text-center">
+            <p className="text-gray-500 text-sm mb-4">Trabajamos con herramientas como</p>
+            <ul className="flex flex-wrap justify-center gap-3">
+              {tools.map(t => (
+                <li key={t} className="px-4 py-2 rounded-full bg-[#F8F9FF] border border-[#0061FC]/10 text-[#0D0D0D] text-sm font-semibold">{t}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+      <section className="py-24 bg-[#F8F9FF]">
+        <div className="max-w-6xl mx-auto px-6">
+          <SectionHeader
+            eyebrow="Formas de trabajo"
+            title={<>Lo hacemos nosotros, <span className="gradient-text">o acompañamos a tu equipo</span></>}
+          />
+          <CardGrid items={modes} cardBg="bg-white" />
+        </div>
+      </section>
+      <StepsSection
+        id="proceso"
+        eyebrow="Metodología"
+        title={<>Un proceso claro <span className="gradient-text">en tres pasos</span></>}
+        steps={steps}
+        footerTitle="Claro · Ordenado · Medible"
+        footerText="Cada proyecto tiene métricas definidas, plazos concretos y entregables que podés evaluar."
+      />
+      <Callout
+        bg="bg-white"
+        title="¿No sabés por dónde empezar?"
+        text="Si todavía no tenés claro qué conviene automatizar primero, el [Diagnóstico de madurez digital](/diagnostico) te da un mapa de oportunidades con el impacto estimado de cada una."
+      />
+      <FaqSection faqs={automatizacionFaqs} bg="bg-white" />
+      <Contact
+        eyebrow="¿Empezamos?"
+        title="Contanos qué tarea querés sacarle de encima a tu equipo"
+        subtitle="Agendá una llamada de 30 minutos, sin compromiso, o escribinos y te respondemos dentro de las 24 horas hábiles."
+        source="Automatización de procesos"
+      />
+    </>
+  )
+}
+
+function CapacitacionPage() {
+  useReveal()
+
+  const approach = [
+    { title: 'Ejemplos del día a día de tu equipo', desc: 'Antes de cada capacitación relevamos qué hace cada área, para practicar con tareas reales y no con ejemplos genéricos.' },
+    { title: 'Herramientas que ya están a mano', desc: 'Trabajamos con asistentes de IA generativa de uso común, como ChatGPT y Claude.' },
+    { title: 'Criterio, no solo trucos', desc: 'Enseñamos cuándo conviene usar IA, cuándo no, y cómo revisar lo que produce. Incluye buenas prácticas de privacidad y uso responsable de la información de la empresa.' },
+    { title: 'Aplicación inmediata', desc: 'Cada participante se lleva ideas y recursos para usar al día siguiente.' },
+  ]
+
+  const formats = [
+    { title: 'Curso general de IA aplicada', desc: 'Fundamentos de inteligencia artificial para toda la organización: qué es, qué puede hacer hoy, cómo escribir buenas instrucciones y cómo integrarla al trabajo diario. El curso básico se dicta en 3 jornadas.' },
+    { title: 'Cursos a medida por área', desc: 'Formación específica para un equipo o sector (administración, ventas, marketing, recursos humanos, operaciones), diseñada a partir de sus procesos y desafíos.' },
+    { title: 'Kit de recursos', desc: 'Consejos, herramientas e ideas que el equipo puede aplicar de inmediato y consultar después de la capacitación.' },
+  ]
+
+  return (
+    <>
+      <PageHero
+        tags={['CAPACITACIÓN IA']}
+        title="Capacitación en inteligencia artificial para empresas"
+        subtitle="Enseñamos haciendo, no explicando. Entrenamos a tu equipo para usar la IA en su trabajo de todos los días, con ejemplos reales de tu empresa."
+        primary={{ label: 'Quiero capacitar a mi equipo', href: '#contacto' }}
+        secondary={{ label: 'Ver modalidades', href: '#modalidades' }}
+      />
+      <ProblemSection
+        eyebrow="El problema"
+        title={<>Todos hablan de IA. <span className="gradient-text">Pocos equipos saben usarla bien.</span></>}
+        paragraphs={[
+          'La mayoría de las personas ya probó ChatGPT u otra herramienta de IA, pero pocas la usan de forma consistente para trabajar mejor. Sin una guía, cada uno la prueba por su cuenta, los resultados son desparejos y la empresa no aprovecha lo que la IA ya puede hacer hoy.',
+          'Una buena capacitación no es una charla sobre el futuro de la tecnología. Es una sesión de trabajo donde tu equipo sale sabiendo resolver tareas concretas más rápido.',
+        ]}
+      />
+      <section className="py-24 bg-white">
+        <div className="max-w-6xl mx-auto px-6">
+          <SectionHeader
+            eyebrow="Nuestro enfoque"
+            title={<>80% práctica, <span className="gradient-text">con tus propios casos</span></>}
+          />
+          <CardGrid items={approach} cols="lg:grid-cols-4" />
+        </div>
+      </section>
+      <section id="modalidades" className="py-24 bg-[#F8F9FF]">
+        <div className="max-w-6xl mx-auto px-6">
+          <SectionHeader
+            eyebrow="Modalidades"
+            title={<>Formatos de <span className="gradient-text">capacitación</span></>}
+            subtitle="Presencial en Buenos Aires o virtual, según lo que necesite tu equipo. Grupos de hasta 15 personas para que todos practiquen."
+          />
+          <CardGrid items={formats} cardBg="bg-white" />
+        </div>
+      </section>
+      <section className="py-24 bg-white">
+        <div className="max-w-3xl mx-auto px-6 text-center">
+          <p className="reveal text-[#0061FC] font-semibold tracking-widest text-sm uppercase mb-4">Para quién es</p>
+          <h2 className="reveal text-4xl md:text-5xl font-extrabold text-[#0D0D0D] leading-tight mb-6">
+            Pensada para equipos <span className="gradient-text">que no son técnicos</span>
+          </h2>
+          <p className="reveal text-gray-500 text-lg leading-relaxed">
+            No hace falta saber programar ni tener experiencia previa con IA. La capacitación está pensada para equipos de negocio, líderes que quieren entender cómo aplicar la IA en su área y empresas que quieren que la adopción sea ordenada y no improvisada.
+          </p>
+        </div>
+      </section>
+      <Callout
+        bg="bg-white"
+        title="Después de la capacitación"
+        text="Si durante la capacitación aparecen procesos que conviene automatizar, podemos ayudarte a [implementarlos](/automatizacion-de-procesos). Y si querés medir el punto de partida de toda la organización, el [Diagnóstico de madurez digital](/diagnostico) incluye un plan de capacitaciones personalizado."
+      />
+      <FaqSection faqs={capacitacionFaqs} bg="bg-white" />
+      <Contact
+        eyebrow="¿Empezamos?"
+        title="Capacitá a tu equipo para trabajar con IA"
+        subtitle="Agendá una llamada de 30 minutos o escribinos y armamos una propuesta para tu equipo."
+        source="Capacitación IA"
+      />
     </>
   )
 }
@@ -1029,6 +1401,8 @@ export function AppShell() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/diagnostico" element={<DiagnosticoPage />} />
+        <Route path="/automatizacion-de-procesos" element={<AutomatizacionPage />} />
+        <Route path="/capacitacion-ia" element={<CapacitacionPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <Footer />
