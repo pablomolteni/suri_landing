@@ -28,6 +28,7 @@ function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const location = useLocation()
+  const isHome = location.pathname === '/'
   const isDiag = location.pathname === '/diagnostico'
 
   useEffect(() => {
@@ -37,12 +38,12 @@ function Navbar() {
   }, [])
 
   const links = [
-    { label: 'Servicios', href: isDiag ? '/#servicios' : '#servicios' },
-    { label: 'Cómo trabajamos', href: isDiag ? '/#proceso' : '#proceso' },
-    { label: 'Para quién', href: isDiag ? '/#audiencia' : '#audiencia' },
+    { label: 'Servicios', href: isHome ? '#servicios' : '/#servicios' },
+    { label: 'Cómo trabajamos', href: isHome ? '#proceso' : '/#proceso' },
+    { label: 'Para quién', href: isHome ? '#audiencia' : '/#audiencia' },
   ]
 
-  const ctaHref = isDiag ? '#contacto-diagnostico' : '#contacto'
+  const ctaHref = isDiag ? '#contacto-diagnostico' : isHome ? '#contacto' : '/#contacto'
   const ctaLabel = isDiag ? 'Solicitar diagnóstico' : 'Hablemos'
 
   return (
@@ -777,7 +778,7 @@ function DiagComoFunciona() {
 function DiagEntregables() {
   const items = [
     { title: 'Puntaje global de adopción tecnológica', desc: 'Nivel 1 a 4, con descripción de lo que significa para tu organización.' },
-    { title: 'Gráfico de araña por dimensión', desc: 'Visualización de scores en las 8 dimensiones evaluadas.' },
+    { title: 'Gráfico de araña por dimensión', desc: 'Visualización de scores en las 6 dimensiones evaluadas.' },
     { title: 'Análisis de brecha dirección-operativos', desc: 'Diferencias de percepción entre niveles jerárquicos.' },
     { title: 'Hallazgos cualitativos', desc: 'Voces anonimizadas de la organización que enriquecen el análisis.' },
     { title: 'Roadmap en 3 horizontes', desc: 'Iniciativas priorizadas para 0-3, 3-9 y 9-18 meses.' },
@@ -994,8 +995,26 @@ function DiagnosticoPage() {
   )
 }
 
+function NotFoundPage() {
+  return (
+    <section className="relative min-h-screen flex items-center overflow-hidden noise">
+      <div className="absolute inset-0 gradient-bg" />
+      <div className="relative max-w-6xl mx-auto px-6 py-32 text-white text-center">
+        <p className="font-semibold tracking-widest text-sm uppercase mb-4 text-white/70">Error 404</p>
+        <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-6">Página no encontrada</h1>
+        <p className="text-lg text-white/80 mb-10 max-w-lg mx-auto">
+          La página que buscás no existe o fue movida.
+        </p>
+        <a href="/" className="px-8 py-4 rounded-full bg-white text-[#0061FC] font-bold text-base hover:scale-105 transition-transform duration-200 shadow-lg">
+          Volver al inicio
+        </a>
+      </div>
+    </section>
+  )
+}
+
 /* ─── App shell ─── */
-function AppShell() {
+export function AppShell() {
   return (
     <div className="font-sans">
       <ScrollToTop />
@@ -1003,6 +1022,7 @@ function AppShell() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/diagnostico" element={<DiagnosticoPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <Footer />
     </div>
