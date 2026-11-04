@@ -73,7 +73,12 @@ function Navbar() {
         </div>
 
         {/* Mobile hamburger */}
-        <button className="md:hidden p-2 text-gray-800" onClick={() => setOpen(!open)}>
+        <button
+          className="md:hidden p-2 text-gray-800"
+          onClick={() => setOpen(!open)}
+          aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
+          aria-expanded={open}
+        >
           <div className="w-5 h-0.5 mb-1.5 bg-gray-800" />
           <div className="w-5 h-0.5 mb-1.5 bg-gray-800" />
           <div className="w-5 h-0.5 bg-gray-800" />
@@ -564,18 +569,18 @@ function Contact() {
 
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
               <div>
-                <label className="block text-xs font-semibold text-gray-500 mb-1.5 uppercase tracking-wide">Nombre</label>
-                <input type="text" name="name" required value={form.name} onChange={handleChange} placeholder="Tu nombre"
+                <label htmlFor="contact-name" className="block text-xs font-semibold text-gray-500 mb-1.5 uppercase tracking-wide">Nombre</label>
+                <input type="text" id="contact-name" name="name" autoComplete="name" required value={form.name} onChange={handleChange} placeholder="Tu nombre"
                   className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-[#A37EF7]/40 focus:border-[#A37EF7] transition-all" />
               </div>
               <div>
-                <label className="block text-xs font-semibold text-gray-500 mb-1.5 uppercase tracking-wide">Correo electrónico</label>
-                <input type="email" name="email" required value={form.email} onChange={handleChange} placeholder="tu@empresa.com"
+                <label htmlFor="contact-email" className="block text-xs font-semibold text-gray-500 mb-1.5 uppercase tracking-wide">Correo electrónico</label>
+                <input type="email" id="contact-email" name="email" autoComplete="email" required value={form.email} onChange={handleChange} placeholder="tu@empresa.com"
                   className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-[#A37EF7]/40 focus:border-[#A37EF7] transition-all" />
               </div>
               <div>
-                <label className="block text-xs font-semibold text-gray-500 mb-1.5 uppercase tracking-wide">Comentario</label>
-                <textarea name="message" required rows={3} value={form.message} onChange={handleChange} placeholder="Contanos brevemente tu situación..."
+                <label htmlFor="contact-message" className="block text-xs font-semibold text-gray-500 mb-1.5 uppercase tracking-wide">Comentario</label>
+                <textarea id="contact-message" name="message" required rows={3} value={form.message} onChange={handleChange} placeholder="Contanos brevemente tu situación..."
                   className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-[#A37EF7]/40 focus:border-[#A37EF7] transition-all resize-none" />
               </div>
 
@@ -657,9 +662,11 @@ function DiagHero() {
               {/* Glow behind image */}
               <div className="absolute inset-0 bg-white/10 blur-2xl rounded-3xl scale-95" />
               <img
-                src="/scoring_1.png"
-                alt="Gráfico de araña por dimensión"
-                className="relative rounded-2xl shadow-2xl w-full border border-white/20"
+                src="/scoring_1.webp"
+                width="1212"
+                height="810"
+                alt="Gráfico de araña con el puntaje de adopción tecnológica por dimensión"
+                className="relative rounded-2xl shadow-2xl w-full h-auto border border-white/20"
               />
             </div>
           </div>
@@ -825,7 +832,7 @@ function DiagEntregables() {
           {/* Right — screenshot */}
           <div className="reveal">
             <div className="rounded-2xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
-              <img src="/scoring_5.png" alt="Detalle por dimensión" className="w-full" />
+              <img src="/scoring_5.webp" width="983" height="889" loading="lazy" decoding="async" alt="Informe de diagnóstico con el detalle del puntaje por dimensión" className="w-full h-auto" />
             </div>
           </div>
 
@@ -925,18 +932,18 @@ function DiagContact() {
 
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
               <div>
-                <label className="block text-xs font-semibold text-gray-500 mb-1.5 uppercase tracking-wide">Nombre</label>
-                <input type="text" name="name" required value={form.name} onChange={handleChange} placeholder="Tu nombre"
+                <label htmlFor="diag-name" className="block text-xs font-semibold text-gray-500 mb-1.5 uppercase tracking-wide">Nombre</label>
+                <input type="text" id="diag-name" name="name" autoComplete="name" required value={form.name} onChange={handleChange} placeholder="Tu nombre"
                   className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-[#A37EF7]/40 focus:border-[#A37EF7] transition-all" />
               </div>
               <div>
-                <label className="block text-xs font-semibold text-gray-500 mb-1.5 uppercase tracking-wide">Correo electrónico</label>
-                <input type="email" name="email" required value={form.email} onChange={handleChange} placeholder="tu@empresa.com"
+                <label htmlFor="diag-email" className="block text-xs font-semibold text-gray-500 mb-1.5 uppercase tracking-wide">Correo electrónico</label>
+                <input type="email" id="diag-email" name="email" autoComplete="email" required value={form.email} onChange={handleChange} placeholder="tu@empresa.com"
                   className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-[#A37EF7]/40 focus:border-[#A37EF7] transition-all" />
               </div>
               <div>
-                <label className="block text-xs font-semibold text-gray-500 mb-1.5 uppercase tracking-wide">Comentario</label>
-                <textarea name="message" required rows={3} value={form.message} onChange={handleChange} placeholder="Contanos brevemente tu empresa y situación..."
+                <label htmlFor="diag-message" className="block text-xs font-semibold text-gray-500 mb-1.5 uppercase tracking-wide">Comentario</label>
+                <textarea id="diag-message" name="message" required rows={3} value={form.message} onChange={handleChange} placeholder="Contanos brevemente tu empresa y situación..."
                   className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-[#A37EF7]/40 focus:border-[#A37EF7] transition-all resize-none" />
               </div>
 

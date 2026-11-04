@@ -9,7 +9,7 @@ export default {
         pink: { suri: '#F58CF5' },
       },
       fontFamily: {
-        sans: ['"Rethink Sans"', 'sans-serif'],
+        sans: ['"Rethink Sans Variable"', 'sans-serif'],
       },
       backgroundImage: {
         'gradient-suri': 'linear-gradient(135deg, #0061FC 0%, #A37EF7 50%, #F58CF5 100%)',

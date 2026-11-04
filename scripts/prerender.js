@@ -11,11 +11,16 @@ const ssrDir = path.join(root, 'dist-ssr')
 const { render } = await import(pathToFileURL(path.join(ssrDir, 'entry-server.js')).href)
 const template = fs.readFileSync(path.join(dist, 'index.html'), 'utf-8')
 
+// Preload the latin subset of the self-hosted font so text renders in Rethink Sans sooner
+const font = fs.readdirSync(path.join(dist, 'assets')).find(f => /^rethink-sans-latin-wght-normal-.*\.woff2$/.test(f))
+const fontPreload = font ? `<link rel="preload" href="/assets/${font}" as="font" type="font/woff2" crossorigin />` : ''
+
 const escape = s => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 
 function head(page) {
   const url = `${SITE_URL}${page.path === '/' ? '/' : page.path}`
   const tags = [
+    fontPreload,
     `<title>${escape(page.title)}</title>`,
     `<meta name="description" content="${escape(page.description)}" />`,
   ]
@@ -26,7 +31,7 @@ function head(page) {
       `<link rel="canonical" href="${url}" />`,
       '<meta property="og:type" content="website" />',
       '<meta property="og:site_name" content="SURI" />',
-      '<meta property="og:locale" content="es_LA" />',
+      '<meta property="og:locale" content="es_AR" />',
       `<meta property="og:url" content="${url}" />`,
       `<meta property="og:title" content="${escape(page.title)}" />`,
       `<meta property="og:description" content="${escape(page.description)}" />`,

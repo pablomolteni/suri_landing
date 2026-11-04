@@ -28,7 +28,7 @@ export const pages = [
           '@id': `${SITE_URL}/#website`,
           name: 'SURI',
           url: `${SITE_URL}/`,
-          inLanguage: 'es',
+          inLanguage: 'es-AR',
           publisher: provider,
         },
         {
