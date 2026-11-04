@@ -68,7 +68,7 @@ export const pages = [
   {
     path: '/',
     file: 'index.html',
-    title: 'SURI | Automatización de procesos e IA para pymes en Buenos Aires',
+    title: 'Automatización e IA para pymes | SURI',
     description: 'Consultora de IA y automatización en Buenos Aires. Automatizamos procesos, capacitamos equipos en IA y diagnosticamos la madurez digital de tu empresa.',
     jsonLd: {
       '@context': 'https://schema.org',
