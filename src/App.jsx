@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import logoHColor from './assets/logos/logo-h-color.svg'
 import logoHBlanco from './assets/logos/logo-h-blanco.svg'
@@ -1470,7 +1470,22 @@ function NosotrosPage() {
                 </div>
                 <h3 className="font-bold text-[#0D0D0D] text-xl">{f.name}</h3>
                 <p className="text-[#0061FC] font-semibold text-sm mt-1">{f.role}</p>
-                {f.bio && <p className="text-gray-500 text-sm leading-relaxed mt-4">{f.bio}</p>}
+                {f.bio.map(p => (
+                  <p key={p} className="text-gray-500 text-sm leading-relaxed mt-4">
+                    {f.org
+                      ? p.split(f.org.name).map((part, j) => (
+                          <Fragment key={j}>
+                            {j > 0 && (
+                              <a href={f.org.url} target="_blank" rel="noopener noreferrer" className="text-[#0061FC] font-semibold hover:underline">
+                                {f.org.name}
+                              </a>
+                            )}
+                            {part}
+                          </Fragment>
+                        ))
+                      : p}
+                  </p>
+                ))}
                 {f.linkedin && (
                   <a href={f.linkedin} target="_blank" rel="noopener noreferrer" className="inline-block mt-4 text-[#0061FC] text-sm font-semibold hover:underline">
                     LinkedIn

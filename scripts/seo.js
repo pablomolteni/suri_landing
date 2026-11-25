@@ -10,6 +10,7 @@ const people = founders.map(f => ({
   jobTitle: f.role,
   worksFor: { '@id': `${SITE_URL}/#organization` },
   ...(f.linkedin && { sameAs: [f.linkedin] }),
+  ...(f.org && { affiliation: { '@type': 'Organization', name: f.org.name, url: f.org.url } }),
 }))
 
 const organization = {
