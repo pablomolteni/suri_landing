@@ -4,6 +4,8 @@ import App from './App.jsx'
 import { initAnalytics } from './analytics.js'
 import '@fontsource-variable/rethink-sans'
 import './index.css'
+import './ritmo/ritmo-animations.css'
+import './ritmo/ritmo-visual-fixes.css'
 
 const root = document.getElementById('root')
 const app = (

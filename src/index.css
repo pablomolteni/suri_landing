@@ -98,6 +98,14 @@
 .reveal-delay-5 { transition-delay: 0.5s; }
 .reveal-delay-6 { transition-delay: 0.6s; }
 
+/* Ritmo: ritmo-animations.js loads after hydration, so keep line-by-line titles hidden until it
+   has wrapped the words (avoids a flash of the full title). If the script never arrives, show it after 3s. */
+@keyframes ritmo-show { to { visibility: visible; } }
+.ritmo-js [data-ritmo~="lines"]:not(.ritmo-ready) {
+  visibility: hidden;
+  animation: ritmo-show 0s 3s forwards;
+}
+
 /* Noise texture overlay */
 .noise::after {
   content: '';

@@ -71,6 +71,7 @@ function Navbar() {
           ))}
           <a
             href={ctaHref}
+            data-ritmo="arrow"
             className="px-5 py-2 rounded-full text-sm font-semibold gradient-bg text-white hover:opacity-90 transition-all duration-200"
           >
             {ctaLabel}
@@ -200,11 +201,11 @@ function PageHero({ tags, title, subtitle, primary, secondary }) {
 }
 
 /* ─── Section header ─── */
-function SectionHeader({ eyebrow, title, subtitle, dark = false }) {
+function SectionHeader({ eyebrow, title, subtitle, dark = false, fix = false }) {
   return (
     <div className="text-center mb-16">
-      <p className={`reveal font-semibold tracking-widest text-sm uppercase mb-4 ${dark ? 'text-[#A37EF7]' : 'text-[#0061FC]'}`}>{eyebrow}</p>
-      <h2 className={`reveal text-4xl md:text-5xl font-extrabold leading-tight ${dark ? 'text-white' : 'text-[#0D0D0D]'}`}>{title}</h2>
+      <p data-ritmo-fix={fix ? 'eyebrow' : undefined} className={`reveal font-semibold tracking-widest text-sm uppercase mb-4 ${dark ? 'text-[#A37EF7]' : 'text-[#0061FC]'}`}>{eyebrow}</p>
+      <h2 data-ritmo-fix={fix ? 'section-title' : undefined} className={`reveal text-4xl md:text-5xl font-extrabold leading-tight ${dark ? 'text-white' : 'text-[#0D0D0D]'}`}>{title}</h2>
       {subtitle && (
         <p className={`reveal mt-4 max-w-2xl mx-auto text-lg leading-relaxed ${dark ? 'text-gray-400' : 'text-gray-500'}`}>{subtitle}</p>
       )}
@@ -257,22 +258,26 @@ function CardGrid({ items, cardBg = 'bg-[#F8F9FF]', cols = 'lg:grid-cols-3' }) {
 }
 
 /* ─── Numbered steps ─── */
-function StepsSection({ id, eyebrow, title, subtitle, steps, footerTitle, footerText, bg = 'bg-white' }) {
+// ritmo: home-only Ritmo animations (steps filling in sequence, background tone, visual fixes F1)
+function StepsSection({ id, eyebrow, title, subtitle, steps, footerTitle, footerText, bg = 'bg-white', ritmo = false }) {
   const gridCols = { 3: 'md:grid-cols-3', 4: 'md:grid-cols-4' }[steps.length]
   const inset = `${50 / steps.length}%`
+  const toneColor = bg === 'bg-white' ? '#FFFFFF' : '#F8F9FF'
 
   return (
-    <section id={id} className={`py-24 ${bg}`}>
+    <section id={id} data-ritmo-tone={ritmo ? toneColor : undefined} className={`py-24 ${bg}`}>
       <div className="max-w-6xl mx-auto px-6">
-        <SectionHeader eyebrow={eyebrow} title={title} subtitle={subtitle} />
+        <SectionHeader eyebrow={eyebrow} title={title} subtitle={subtitle} fix={ritmo} />
 
-        <div className={`relative grid ${gridCols} gap-8`}>
-          <div className="hidden md:block absolute h-0.5 bg-gradient-to-r from-[#0061FC] via-[#A37EF7] to-[#F58CF5]"
+        <div data-ritmo={ritmo ? 'steps stagger' : undefined} className={`relative grid ${gridCols} gap-8`}>
+          <div
+            data-ritmo-line={ritmo ? '' : undefined}
+            className="hidden md:block absolute h-0.5 bg-gradient-to-r from-[#0061FC] via-[#A37EF7] to-[#F58CF5]"
             style={{ top: '40px', left: inset, right: inset }}
           />
           {steps.map((s, i) => (
             <div key={s.title} className={`reveal reveal-delay-${i + 1} relative text-center`}>
-              <div className="w-20 h-20 rounded-full gradient-bg flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-lg relative z-10">
+              <div data-ritmo-step={ritmo ? '' : undefined} className="w-20 h-20 rounded-full gradient-bg flex items-center justify-center text-white text-2xl font-extrabold mx-auto mb-6 shadow-lg relative z-10">
                 {i + 1}
               </div>
               <h3 className="font-bold text-[#0D0D0D] text-lg mb-3">{s.title}</h3>
@@ -282,7 +287,7 @@ function StepsSection({ id, eyebrow, title, subtitle, steps, footerTitle, footer
         </div>
 
         <div className="reveal mt-14 text-center">
-          <p className="text-[#0061FC] font-bold tracking-widest text-sm uppercase">{footerTitle}</p>
+          <p data-ritmo-fix={ritmo ? 'eyebrow' : undefined} className="text-[#0061FC] font-bold tracking-widest text-sm uppercase">{footerTitle}</p>
           <p className="text-gray-500 text-sm mt-2">{footerText}</p>
         </div>
       </div>
@@ -296,11 +301,12 @@ function FaqSection({
   bg = 'bg-white',
   eyebrow = 'FAQ',
   title = <>Preguntas <span className="gradient-text">frecuentes</span></>,
+  fix = false,
 }) {
   return (
     <section id="preguntas-frecuentes" className={`py-24 ${bg}`}>
       <div className="max-w-3xl mx-auto px-6">
-        <SectionHeader eyebrow={eyebrow} title={title} />
+        <SectionHeader eyebrow={eyebrow} title={title} fix={fix} />
         <div className="flex flex-col gap-3">
           {faqs.map(f => (
             <details key={f.q} className="reveal group bg-[#F8F9FF] rounded-2xl px-6 py-5 open:shadow-md transition-shadow duration-300">
@@ -339,7 +345,7 @@ function Hero() {
             ))}
           </div>
 
-          <h1 className="animate-fade-up-delay-1 text-5xl md:text-7xl font-extrabold leading-[1.05] mb-6">
+          <h1 data-ritmo="lines" className="animate-fade-up-delay-1 text-5xl md:text-7xl font-extrabold leading-[1.05] mb-6">
             Automatización inteligente para empresas que quieren escalar
           </h1>
 
@@ -348,13 +354,20 @@ function Hero() {
           </p>
 
           <div className="animate-fade-up-delay-3 flex flex-wrap gap-4">
-            <a href="#contacto" className="px-8 py-4 rounded-full bg-white text-[#0061FC] font-bold text-base hover:scale-105 transition-transform duration-200 shadow-lg">
+            <a href="#contacto" data-ritmo="arrow" className="px-8 py-4 rounded-full bg-white text-[#0061FC] font-bold text-base hover:scale-105 transition-transform duration-200 shadow-lg">
               Hablemos
             </a>
             <a href="#servicios" className="px-8 py-4 rounded-full border border-white/40 text-white font-semibold text-base hover:bg-white/10 transition-all duration-200">
               Ver servicios
             </a>
           </div>
+          {/* F4 (ritmo-visual-fixes.css): online diagnostic CTA. Adds copy taken from /diagnostico,
+              so it stays off until Pablo approves the text.
+          <div className="ritmo-diag-hero animate-fade-up-delay-4">
+            <a href="https://diagnostico.suri.lat" data-ritmo="arrow">Hacé el diagnóstico inicial →</a>
+            <span>Menos de 20 minutos · Sin registrarse ni dar datos de pago</span>
+          </div>
+          */}
         </div>
       </div>
     </section>
@@ -403,8 +416,8 @@ function Problem() {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-[#A37EF7]/40 to-transparent" />
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-16">
-          <p className="reveal text-[#A37EF7] font-semibold tracking-widest text-sm mb-4 uppercase">El problema</p>
-          <h2 className="reveal text-4xl md:text-5xl font-extrabold text-white leading-tight">
+          <p data-ritmo-fix="eyebrow" className="reveal text-[#A37EF7] font-semibold tracking-widest text-sm mb-4 uppercase">El problema</p>
+          <h2 data-ritmo-fix="section-title" className="reveal text-4xl md:text-5xl font-extrabold text-white leading-tight">
             Las empresas crecen.<br />
             <span className="gradient-text">Los procesos no siempre acompañan.</span>
           </h2>
@@ -413,7 +426,7 @@ function Problem() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div data-ritmo="stagger" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {problems.map((p, i) => (
             <div
               key={p.title}
@@ -439,23 +452,23 @@ function WhatIsSuri() {
   ]
 
   return (
-    <section id="suri" className="py-24 bg-white">
+    <section id="suri" data-ritmo-tone="#FFFFFF" className="py-24 bg-white">
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div>
-            <p className="reveal text-[#0061FC] font-semibold tracking-widest text-sm uppercase mb-4">¿Para qué estamos?</p>
-            <h2 className="reveal text-4xl md:text-5xl font-extrabold leading-tight mb-6 text-[#0D0D0D]">
+            <p data-ritmo-fix="eyebrow" className="reveal text-[#0061FC] font-semibold tracking-widest text-sm uppercase mb-4">¿Para qué estamos?</p>
+            <h2 data-ritmo-fix="section-title" className="reveal text-4xl md:text-5xl font-extrabold leading-tight mb-6 text-[#0D0D0D]">
               <span className="gradient-text">Acompañamos a las organizaciones a operar mejor.</span>
             </h2>
             <p className="reveal text-gray-600 text-lg leading-relaxed mb-8">
               SURI ayuda a empresas a automatizar tareas repetitivas mediante flujos inteligentes e inteligencia artificial aplicada. La IA es un medio — poderoso cuando se aplica con criterio estratégico.
             </p>
-            <div className="reveal inline-block px-5 py-3 rounded-xl bg-[#F8F9FF] border border-[#0061FC]/10 text-[#0061FC] font-medium text-sm">
+            <div data-ritmo-fix="label" className="reveal inline-block px-5 py-3 rounded-xl bg-[#F8F9FF] border border-[#0061FC]/10 text-[#0061FC] font-medium text-sm">
               Procesos escalables
             </div>
           </div>
 
-          <div className="flex flex-col gap-4">
+          <div data-ritmo="stagger" className="flex flex-col gap-4">
             {pillars.map((p, i) => (
               <div
                 key={p.title}
@@ -531,16 +544,16 @@ function Services() {
   ]
 
   return (
-    <section id="servicios" className="py-24 bg-[#F8F9FF]">
+    <section id="servicios" data-ritmo-tone="#F8F9FF" className="py-24 bg-[#F8F9FF]">
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-16">
-          <p className="reveal text-[#0061FC] font-semibold tracking-widest text-sm uppercase mb-4">Servicios</p>
-          <h2 className="reveal text-4xl md:text-5xl font-extrabold text-[#0D0D0D]">
+          <p data-ritmo-fix="eyebrow" className="reveal text-[#0061FC] font-semibold tracking-widest text-sm uppercase mb-4">Servicios</p>
+          <h2 data-ritmo-fix="section-title" className="reveal text-4xl md:text-5xl font-extrabold text-[#0D0D0D]">
             ¿En qué podemos <span className="gradient-text">ayudarte?</span>
           </h2>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-6 items-start">
+        <div data-ritmo="stagger" className="grid lg:grid-cols-3 gap-6 items-start">
           {services.map((s, i) => {
             const isOpen = open === i
             return (
@@ -582,6 +595,8 @@ function Services() {
                   </button>
                   <a
                     href={s.ctaHref || '#contacto'}
+                    data-ritmo="arrow"
+                    data-ritmo-fix={s.color === '#F58CF5' ? 'pink-cta' : undefined}
                     className="w-full text-center py-3 rounded-xl text-sm font-bold text-white transition-all duration-200 hover:opacity-90 hover:scale-[1.02]"
                     style={{ background: s.featured ? `linear-gradient(135deg, #0061FC, #A37EF7)` : s.color }}
                   >
@@ -614,6 +629,7 @@ function HowWeWork() {
       steps={steps}
       footerTitle="Claro · Ordenado · Medible"
       footerText="Cada proyecto tiene métricas definidas, plazos concretos y entregables tangibles que podés evaluar."
+      ritmo
     />
   )
 }
@@ -633,8 +649,8 @@ function ForWhom() {
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div>
-            <p className="reveal text-[#0061FC] font-semibold tracking-widest text-sm uppercase mb-4">Nuestro cliente</p>
-            <h2 className="reveal text-4xl md:text-5xl font-extrabold text-[#0D0D0D] leading-tight mb-6">
+            <p data-ritmo-fix="eyebrow" className="reveal text-[#0061FC] font-semibold tracking-widest text-sm uppercase mb-4">Nuestro cliente</p>
+            <h2 data-ritmo-fix="section-title" className="reveal text-4xl md:text-5xl font-extrabold text-[#0D0D0D] leading-tight mb-6">
               ¿Para quién<br />
               <span className="gradient-text">es SURI?</span>
             </h2>
@@ -643,7 +659,7 @@ function ForWhom() {
             </p>
           </div>
 
-          <div className="flex flex-col gap-4">
+          <div data-ritmo="stagger" className="flex flex-col gap-4">
             {traits.map((t, i) => (
               <div
                 key={t.title}
@@ -671,6 +687,7 @@ function Contact({
   title = 'Empecemos a trabajar juntos.',
   subtitle = 'Elegí cómo querés conectar con nosotros.',
   source,
+  fix = false,
 }) {
   const [form, setForm] = useState({ name: '', email: '', message: '' })
   const [status, setStatus] = useState(null)
@@ -706,8 +723,8 @@ function Contact({
 
       <div className="relative max-w-5xl mx-auto px-6">
         <div className="text-center text-white mb-14">
-          <p className="reveal text-white/70 font-semibold tracking-widest text-sm uppercase mb-4">{eyebrow}</p>
-          <h2 className="reveal text-4xl md:text-5xl font-extrabold mb-4 leading-tight">
+          <p data-ritmo-fix={fix ? 'eyebrow' : undefined} className="reveal text-white/70 font-semibold tracking-widest text-sm uppercase mb-4">{eyebrow}</p>
+          <h2 data-ritmo-fix={fix ? 'section-title' : undefined} className="reveal text-4xl md:text-5xl font-extrabold mb-4 leading-tight">
             {title}
           </h2>
           <p className="reveal text-white/75 text-lg max-w-lg mx-auto">
@@ -715,7 +732,7 @@ function Contact({
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6 items-start">
+        <div data-ritmo="stagger" className="grid md:grid-cols-2 gap-6 items-start">
           <div className="reveal bg-white/15 backdrop-blur-sm border border-white/20 rounded-3xl p-8 text-white flex flex-col justify-between gap-8">
             <div>
               <div className="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center mb-6">
@@ -745,6 +762,7 @@ function Contact({
               onClick={() => track('schedule_call_click', { page_path: window.location.pathname })}
               target="_blank"
               rel="noopener noreferrer"
+              data-ritmo="arrow"
               className="w-full text-center py-4 rounded-xl bg-white text-[#0061FC] font-bold text-sm hover:scale-[1.02] transition-transform duration-200 shadow-lg"
             >
               Hablemos →
@@ -1190,8 +1208,9 @@ function HomePage() {
         bg="bg-white"
         eyebrow="Preguntas frecuentes"
         title={<>Lo que más <span className="gradient-text">nos preguntan</span></>}
+        fix
       />
-      <Contact />
+      <Contact fix />
     </>
   )
 }
@@ -1492,6 +1511,12 @@ function NotFoundPage() {
 
 /* ─── App shell ─── */
 export function AppShell() {
+  // Ritmo animations: browser only, loaded after hydration so it never touches the prerendered markup
+  // before React does. The script starts itself on load (window.Ritmo.init) and is idempotent.
+  useEffect(() => {
+    import('./ritmo/ritmo-animations.js')
+  }, [])
+
   return (
     <div className="font-sans">
       <ScrollToTop />
