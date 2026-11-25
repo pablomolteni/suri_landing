@@ -1,0 +1,65 @@
+/*!
+ * SURI · Ritmo — animaciones (v1.0)
+ * Vanilla, sin dependencias. Se engancha con atributos data-ritmo.
+ * Todos los estados iniciales "ocultos" dependen de html.ritmo-js (lo agrega ritmo-animations.js).
+ * Sin JS, o con prefers-reduced-motion, el contenido se ve completo y quieto.
+ */
+:root{
+  --ritmo-ease:cubic-bezier(.16,1,.3,1);      /* salida suave (expo-out) */
+  --ritmo-ease-io:cubic-bezier(.65,0,.35,1);  /* para rellenos */
+  --ritmo-ease-arrow:cubic-bezier(.22,1,.36,1);
+  --ritmo-line-dur:.75s;      /* título línea por línea */
+  --ritmo-reveal-dur:.6s;     /* fade-up */
+  --ritmo-reveal-dist:18px;
+  --ritmo-step-fill-dur:.55s; /* relleno de cada paso */
+  --ritmo-step-line-dur:.6s;  /* avance de la línea entre pasos */
+  --ritmo-tone-dur:.7s;       /* cambio de tono de fondo */
+  --ritmo-step-empty:#ffffff; /* color del paso "vacío" (antes de llenarse) */
+  --ritmo-step-empty-text:#A37EF7;
+  --ritmo-track:#ECEDF3;      /* riel gris debajo de la línea */
+}
+
+/* 1) data-ritmo="lines" — título que entra línea por línea con máscara */
+.ritmo-js [data-ritmo~="lines"] .ritmo-w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-bottom:-.08em}
+.ritmo-js [data-ritmo~="lines"] .ritmo-w>span{display:inline-block;transform:translateY(110%)}
+.ritmo-js [data-ritmo~="lines"].ritmo-in .ritmo-w>span{transform:none;transition:transform var(--ritmo-line-dur) var(--ritmo-ease);transition-delay:var(--ritmo-d,0s)}
+/* si el título tenía una animación de entrada propia, se desactiva mientras se usa ritmo */
+.ritmo-js [data-ritmo~="lines"].ritmo-ready{animation:none!important;opacity:1!important;transform:none!important}
+/* palabras dentro de un texto con degradado (background-clip:text): el degradado se aplica por palabra */
+.ritmo-js [data-ritmo~="lines"] .ritmo-w.ritmo-clip>span{background:inherit;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+
+/* 2) data-ritmo="stagger" — hijos que aparecen escalonados (fade-up) */
+.ritmo-js [data-ritmo~="stagger"]>[data-ritmo-item],
+.ritmo-js [data-ritmo~="stagger"]:not([data-ritmo-items])>*:not(.reveal):not([data-ritmo-line]):not(.ritmo-track){opacity:0;transform:translateY(var(--ritmo-reveal-dist))}
+.ritmo-js [data-ritmo~="stagger"].ritmo-in>[data-ritmo-item],
+.ritmo-js [data-ritmo~="stagger"].ritmo-in:not([data-ritmo-items])>*:not(.reveal):not([data-ritmo-line]):not(.ritmo-track){opacity:1;transform:none;transition:opacity var(--ritmo-reveal-dur) var(--ritmo-ease-arrow),transform var(--ritmo-reveal-dur) var(--ritmo-ease-arrow);transition-delay:var(--ritmo-d,0s)}
+/* data-ritmo="reveal" — un solo elemento */
+.ritmo-js [data-ritmo~="reveal"]{opacity:0;transform:translateY(var(--ritmo-reveal-dist))}
+.ritmo-js [data-ritmo~="reveal"].ritmo-in{opacity:1;transform:none;transition:opacity var(--ritmo-reveal-dur) var(--ritmo-ease-arrow),transform var(--ritmo-reveal-dur) var(--ritmo-ease-arrow)}
+
+/* 3) data-ritmo="steps" — pasos que se llenan en secuencia + línea que avanza */
+.ritmo-js [data-ritmo-step]{position:relative;isolation:isolate}
+.ritmo-js [data-ritmo-step]::before{content:"";position:absolute;inset:3px;border-radius:inherit;background:var(--ritmo-step-empty);z-index:0;transform:scale(1);transition:transform var(--ritmo-step-fill-dur) var(--ritmo-ease-io)}
+.ritmo-js [data-ritmo-step]>.ritmo-step-label{position:relative;z-index:1;color:var(--ritmo-step-empty-text);transition:color .4s ease-out .15s}
+.ritmo-js [data-ritmo-step].ritmo-on::before{transform:scale(0)}
+.ritmo-js [data-ritmo-step].ritmo-on>.ritmo-step-label{color:inherit}
+.ritmo-js [data-ritmo-line]{transform-origin:0 50%;transform:scaleX(var(--ritmo-l,0));transition:transform var(--ritmo-step-line-dur) var(--ritmo-ease-io)}
+.ritmo-js .ritmo-track{background:var(--ritmo-track)!important;transform:none!important}
+
+/* 4) data-ritmo="arrow" — flecha que se desplaza en hover/focus */
+.ritmo-arrow{display:inline-block;margin-left:.35em;transition:transform .3s var(--ritmo-ease-arrow)}
+a:hover .ritmo-arrow,a:focus-visible .ritmo-arrow,button:hover .ritmo-arrow,button:focus-visible .ritmo-arrow,.ritmo-demo-hover .ritmo-arrow{transform:translateX(5px)}
+
+/* 5) data-ritmo-tone — fondo de página que cambia de tono entre secciones claras */
+body.ritmo-tone-on{transition:background-color var(--ritmo-tone-dur) ease-out}
+body.ritmo-tone-on [data-ritmo-tone]{background:transparent!important}
+
+/* Movimiento reducido: todo visible y quieto */
+.ritmo-reduced [data-ritmo] , .ritmo-reduced [data-ritmo] *{transition:none!important;animation:none!important}
+@media (prefers-reduced-motion: reduce){
+  [data-ritmo],[data-ritmo] *,[data-ritmo-step]::before,[data-ritmo-line]{transition:none!important;animation:none!important}
+  .ritmo-js [data-ritmo~="stagger"]>*,.ritmo-js [data-ritmo~="reveal"]{opacity:1!important;transform:none!important}
+  .ritmo-js [data-ritmo~="lines"] .ritmo-w>span{transform:none!important}
+  .ritmo-js [data-ritmo-step]::before{transform:scale(0)!important}
+  .ritmo-js [data-ritmo-line]{transform:none!important}
+}

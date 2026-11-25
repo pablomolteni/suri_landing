@@ -1,0 +1,26 @@
+/*!
+ * SURI · Ritmo — arreglos visuales opcionales (sin movimiento). Independiente de ritmo-animations.
+ * Hooks por atributo data-ritmo-fix. Ninguno cambia texto, salvo el bloque F4 (ver nota).
+ */
+/* F1 · Jerarquía: títulos de sección más grandes y apretados; etiquetas (eyebrow) más chicas */
+[data-ritmo-fix~="section-title"]{letter-spacing:-.022em}
+@media (min-width:768px){[data-ritmo-fix~="section-title"]{font-size:3.5rem!important;line-height:1.05!important}} /* ~56px */
+[data-ritmo-fix~="eyebrow"]{font-size:.75rem!important;letter-spacing:.16em!important}
+[data-ritmo-fix~="body-contrast"]{color:#4b5563!important}
+
+/* F2 · "Procesos escalables" (o el texto que tenga): de falso botón a etiqueta */
+[data-ritmo-fix~="label"]{background:none!important;border:0!important;padding:0!important;box-shadow:none!important;color:#0061FC!important;display:inline-flex!important;align-items:center;gap:10px;font-size:.8rem!important;letter-spacing:.12em;text-transform:uppercase;font-weight:600!important}
+[data-ritmo-fix~="label"]::before{content:"";width:28px;height:2px;border-radius:2px;background:linear-gradient(90deg,#0061fc,#a37ef7,#f58cf5)}
+
+/* F3 · Botón rosa (#F58CF5) con texto oscuro para que se lea */
+[data-ritmo-fix~="pink-cta"]{color:#0D0D14!important}
+
+/* F4 · CTA del diagnóstico online en el hero.
+   ATENCIÓN: agrega copy (tomado de /diagnostico). Pablo lo tiene que aprobar en su proyecto de textos. Markup sugerido:
+   <div class="ritmo-diag-hero">
+     <a href="https://diagnostico.suri.lat" data-ritmo="arrow">Hacé el diagnóstico inicial →</a>
+     <span>Menos de 20 minutos · Sin registrarse ni dar datos de pago</span>
+   </div> */
+.ritmo-diag-hero{margin-top:28px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;color:#fff;font-size:.95rem}
+.ritmo-diag-hero a{font-weight:700;color:#fff;border-bottom:1px solid rgba(255,255,255,.55);padding-bottom:2px}
+.ritmo-diag-hero span{color:rgba(255,255,255,.72)}
