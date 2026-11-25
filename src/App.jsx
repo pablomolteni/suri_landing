@@ -3,7 +3,8 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import logoHColor from './assets/logos/logo-h-color.svg'
 import logoHBlanco from './assets/logos/logo-h-blanco.svg'
 import { track } from './analytics.js'
-import { automatizacionFaqs, capacitacionFaqs, diagnosticoFaqs } from './content/faqs.js'
+import { homeFaqs, automatizacionFaqs, capacitacionFaqs, diagnosticoFaqs } from './content/faqs.js'
+import { founders } from './content/team.js'
 
 /* ─── Scroll reveal hook ─── */
 function useReveal() {
@@ -32,7 +33,7 @@ function Navbar() {
   const location = useLocation()
   const isHome = location.pathname === '/'
   const isDiag = location.pathname === '/diagnostico'
-  const hasContact = ['/', '/automatizacion-de-procesos', '/capacitacion-ia'].includes(location.pathname)
+  const hasContact = ['/', '/automatizacion-de-procesos', '/capacitacion-ia', '/nosotros'].includes(location.pathname)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -115,7 +116,7 @@ function Footer() {
   return (
     <footer className="bg-[#0D0D14] pt-12 pb-8 px-6">
       <div className="max-w-6xl mx-auto">
-        <div className="grid gap-8 sm:grid-cols-3 mb-10">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 mb-10">
           <div>
             <img src={logoHBlanco} alt="SURI" className="h-6 w-auto mb-4" />
             <p className="text-gray-400 text-sm leading-relaxed">Automatización de procesos e IA para empresas.</p>
@@ -129,6 +130,12 @@ function Footer() {
                   <a href={s.href} className="text-gray-400 text-sm hover:text-white transition-colors">{s.label}</a>
                 </li>
               ))}
+            </ul>
+          </div>
+          <div>
+            <p className="text-white text-sm font-semibold mb-3">SURI</p>
+            <ul className="flex flex-col gap-2">
+              <li><a href="/nosotros" className="text-gray-400 text-sm hover:text-white transition-colors">Nosotros</a></li>
             </ul>
           </div>
           <div>
@@ -284,11 +291,16 @@ function StepsSection({ id, eyebrow, title, subtitle, steps, footerTitle, footer
 }
 
 /* ─── FAQ ─── */
-function FaqSection({ faqs, bg = 'bg-white' }) {
+function FaqSection({
+  faqs,
+  bg = 'bg-white',
+  eyebrow = 'FAQ',
+  title = <>Preguntas <span className="gradient-text">frecuentes</span></>,
+}) {
   return (
     <section id="preguntas-frecuentes" className={`py-24 ${bg}`}>
       <div className="max-w-3xl mx-auto px-6">
-        <SectionHeader eyebrow="FAQ" title={<>Preguntas <span className="gradient-text">frecuentes</span></>} />
+        <SectionHeader eyebrow={eyebrow} title={title} />
         <div className="flex flex-col gap-3">
           {faqs.map(f => (
             <details key={f.q} className="reveal group bg-[#F8F9FF] rounded-2xl px-6 py-5 open:shadow-md transition-shadow duration-300">
@@ -1173,6 +1185,12 @@ function HomePage() {
       <Services />
       <HowWeWork />
       <ForWhom />
+      <FaqSection
+        faqs={homeFaqs}
+        bg="bg-white"
+        eyebrow="Preguntas frecuentes"
+        title={<>Lo que más <span className="gradient-text">nos preguntan</span></>}
+      />
       <Contact />
     </>
   )
@@ -1223,7 +1241,7 @@ function AutomatizacionPage() {
     { title: 'Reportes', desc: 'Tableros que se actualizan solos, en lugar de consolidar planillas cada semana.' },
   ]
 
-  const tools = ['n8n', 'Make', 'Zapier', 'OpenAI', 'ChatGPT', 'Claude', 'Google Workspace']
+  const tools = ['n8n', 'Make', 'Zapier', 'OpenAI', 'ChatGPT', 'Claude', 'Gemini', 'Grok', 'Google Workspace']
 
   const modes = [
     { title: 'Desarrollo SURI', desc: 'Nosotros diseñamos, construimos e implementamos la automatización de punta a punta. Te entregamos el flujo funcionando, documentado y medido.' },
@@ -1383,6 +1401,77 @@ function CapacitacionPage() {
   )
 }
 
+function NosotrosPage() {
+  useReveal()
+
+  const principles = [
+    { title: 'Claro', desc: 'Explicamos qué vamos a hacer y por qué, sin jerga técnica.' },
+    { title: 'Ordenado', desc: 'Cada proyecto tiene etapas, plazos y entregables definidos.' },
+    { title: 'Medible', desc: 'Definimos desde el principio cómo vamos a saber si funcionó.' },
+  ]
+
+  const initials = name => name.split(' ').map(w => w[0]).join('')
+
+  return (
+    <>
+      <PageHero
+        tags={['NOSOTROS']}
+        title="Quiénes somos"
+        subtitle="SURI nace para que las empresas usen la inteligencia artificial con criterio: donde suma, medida y explicada para que el equipo la entienda."
+        primary={{ label: 'Hablemos', href: '#contacto' }}
+        secondary={{ label: 'Conocé al equipo', href: '#equipo' }}
+      />
+      <ProblemSection
+        eyebrow="Por qué existe SURI"
+        title={<>La IA es un medio, <span className="gradient-text">no un fin</span></>}
+        paragraphs={[
+          'SURI empezó en 2025 en Buenos Aires. Veíamos que muchas empresas querían usar IA pero no sabían por dónde empezar, o probaban herramientas sueltas que nunca terminaban de integrarse a su operación. Decidimos armar una consultora que primero entiende cómo trabaja cada equipo y después propone soluciones concretas y medibles.',
+        ]}
+      />
+      <section className="py-24 bg-white">
+        <div className="max-w-6xl mx-auto px-6">
+          <SectionHeader
+            eyebrow="Cómo pensamos"
+            title={<>Claro, ordenado <span className="gradient-text">y medible</span></>}
+          />
+          <CardGrid items={principles} />
+        </div>
+      </section>
+      <section id="equipo" className="py-24 bg-[#F8F9FF]">
+        <div className="max-w-4xl mx-auto px-6">
+          <SectionHeader
+            eyebrow="Equipo"
+            title={<>Quiénes están <span className="gradient-text">detrás</span></>}
+          />
+          <div className="grid sm:grid-cols-2 gap-6">
+            {founders.map((f, i) => (
+              <div key={f.name} className={`reveal reveal-delay-${i + 1} bg-white rounded-2xl p-8 shadow-sm`}>
+                <div className="w-16 h-16 rounded-full gradient-bg flex items-center justify-center text-white text-xl font-extrabold mb-5" aria-hidden="true">
+                  {initials(f.name)}
+                </div>
+                <h3 className="font-bold text-[#0D0D0D] text-xl">{f.name}</h3>
+                <p className="text-[#0061FC] font-semibold text-sm mt-1">{f.role}</p>
+                {f.bio && <p className="text-gray-500 text-sm leading-relaxed mt-4">{f.bio}</p>}
+                {f.linkedin && (
+                  <a href={f.linkedin} target="_blank" rel="noopener noreferrer" className="inline-block mt-4 text-[#0061FC] text-sm font-semibold hover:underline">
+                    LinkedIn
+                  </a>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      <Contact
+        eyebrow="Contacto"
+        title="¿Hablamos?"
+        subtitle="Contanos qué querés resolver y te decimos cómo te podemos ayudar."
+        source="Nosotros"
+      />
+    </>
+  )
+}
+
 function NotFoundPage() {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden noise">
@@ -1412,6 +1501,7 @@ export function AppShell() {
         <Route path="/diagnostico" element={<DiagnosticoPage />} />
         <Route path="/automatizacion-de-procesos" element={<AutomatizacionPage />} />
         <Route path="/capacitacion-ia" element={<CapacitacionPage />} />
+        <Route path="/nosotros" element={<NosotrosPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <Footer />

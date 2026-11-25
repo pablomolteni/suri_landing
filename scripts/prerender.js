@@ -61,7 +61,7 @@ for (const page of pages) {
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${pages.filter(p => !p.noindex).map(p => `  <url><loc>${SITE_URL}${p.path}</loc></url>`).join('\n')}
+${pages.filter(p => !p.noindex).map(p => `  <url><loc>${SITE_URL}${p.path}</loc>${p.updated ? `<lastmod>${p.updated}</lastmod>` : ''}</url>`).join('\n')}
 </urlset>
 `
 fs.writeFileSync(path.join(dist, 'sitemap.xml'), sitemap)

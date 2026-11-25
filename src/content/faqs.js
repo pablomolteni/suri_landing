@@ -1,6 +1,37 @@
 // FAQ copy per page. Shared by the pages (App.jsx) and the FAQPage structured data (scripts/seo.js).
 // Answers may contain inline links written as [text](/path).
 
+export const homeFaqs = [
+  {
+    q: '¿Qué es SURI?',
+    a: 'SURI es una consultora de inteligencia artificial y automatización de procesos con base en Buenos Aires. Ayudamos a pymes y empresas a automatizar tareas repetitivas, capacitar a sus equipos en IA y medir su madurez digital.',
+  },
+  {
+    q: '¿Qué servicios ofrece SURI?',
+    a: 'Tres: [automatización de procesos con IA](/automatizacion-de-procesos), [capacitación en inteligencia artificial para equipos](/capacitacion-ia) y [diagnóstico de madurez digital](/diagnostico). Se pueden contratar por separado o combinados, según lo que necesite tu empresa.',
+  },
+  {
+    q: '¿Qué hace una consultora de inteligencia artificial?',
+    a: 'Ayuda a una empresa a usar la IA donde realmente suma. Primero entiende cómo trabaja el equipo, después identifica qué tareas conviene automatizar o asistir con IA, y por último implementa las soluciones y capacita a las personas para usarlas.',
+  },
+  {
+    q: '¿Con qué tipo de empresas trabajan?',
+    a: 'Con pymes y empresas medianas de distintos rubros que quieren modernizar su operación sin frenar el día a día. No hace falta tener un equipo técnico ni experiencia previa con IA.',
+  },
+  {
+    q: '¿Con qué herramientas trabajan?',
+    a: 'Con n8n, Make y Zapier para automatizar; con ChatGPT, Claude, Gemini y Grok para la parte de IA, y con Google Workspace. Siempre que se puede, trabajamos sobre los sistemas que tu empresa ya usa: nos adaptamos a la tecnología de cada cliente y, si vemos limitaciones, lo hablamos y avanzamos juntos.',
+  },
+  {
+    q: '¿Dónde está SURI y en qué zonas trabaja?',
+    a: 'Estamos en Argentina y trabajamos con empresas de todo el país y de Latinoamérica, de forma remota o presencial según el proyecto.',
+  },
+  {
+    q: '¿Por dónde conviene empezar?',
+    a: 'Si no tenés claro qué automatizar o cómo encarar la IA, el mejor punto de partida es el [diagnóstico de madurez digital](/diagnostico). También podés hacer el [autodiagnóstico online gratuito](https://diagnostico.suri.lat) o [escribirnos](#contacto) para una primera charla.',
+  },
+]
+
 export const automatizacionFaqs = [
   {
     q: '¿Qué es la automatización de procesos?',
